@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'login.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -7,10 +8,16 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
-        child: Image(
-          image: AssetImage('images/logo.png'),
-          width: largura_tela * 0.8,
-        ),
+        child: Image.asset('images/logo.png', width: largura_tela * 0.8),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()),
+          );
+        },
+        child: Icon(Icons.arrow_forward),
       ),
     );
   }

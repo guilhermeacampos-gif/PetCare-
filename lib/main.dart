@@ -17,6 +17,7 @@ class MeuApp extends StatelessWidget {
           primary: const Color(0xFF181166),
           secondary: const Color(0xFFEEEEEE),
         ),
+        fontFamily: 'Quicksand',
       ),
       home: SplashScreen(),
     );
