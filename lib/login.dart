@@ -14,7 +14,7 @@ class LoginPage extends StatelessWidget {
             Image.asset('images/logo.png', height: 30, fit: BoxFit.contain),
             SizedBox(width: 10),
             Text(
-              'PETCARE+',
+              'PET CARE+',
               style: TextStyle(
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
