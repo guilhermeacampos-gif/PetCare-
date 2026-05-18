@@ -10,7 +10,7 @@
 
 ## TO DO
 - [ ] No protótipo de alta fidelidade mudar o ícone de notificação, o tamanho do texto aparentemente diferente em algumas telas, no calendário tem duas marcações de datas com as mesmas cores
-- [ ] Uso da cor primária em excesso pode pesar devido ao alto contraste com branco, sugiro usar um branco como #EEEEEE no lugar para não mudar a cor primaria
+- [x] Uso da cor primária em excesso pode pesar devido ao alto contraste com branco, sugiro usar um branco como #EEEEEE no lugar para não mudar a cor primaria
 - [ ] Adicionar identificação automática se é tutor ou veterinário
 - [ ] Colocar botão de excluir após adicionar algo no calendário
 - [ ] Separar rotina por pet. Adicionar remoção de rotina.
