@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -12,21 +13,45 @@ class LoginPage extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('images/logo.png', height: 50, fit: BoxFit.contain),
-            SizedBox(width: 10),
-            Text(
-              'PETCARE+',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-                fontWeight: FontWeight.bold,
-              )
-            )
-          ]
-        )
+            Expanded(child: SizedBox.shrink()),
+            Expanded(
+              flex: 2,
+              child: Row(
+                children: [
+                  Image.asset(
+                    'images/logo.png',
+                    height: 50,
+                    fit: BoxFit.contain,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    'PETCARE+',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: SizedBox(
+                height: 50,
+                child: SvgPicture.asset(
+                  "images/emergency-white.svg",
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.secondary,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),
-        child: Column (
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
@@ -34,15 +59,13 @@ class LoginPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 36,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary
-              )
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
             SizedBox(height: 4),
             Text(
               "Acesse sua conta com seu e-mail e senha",
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary
-              )
+              style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             SizedBox(height: 16),
             Column(
@@ -52,7 +75,7 @@ class LoginPage extends StatelessWidget {
                   "Acesso",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 DropdownMenu(
@@ -60,9 +83,12 @@ class LoginPage extends StatelessWidget {
                   width: double.infinity,
                   dropdownMenuEntries: [
                     DropdownMenuEntry(value: "tutor", label: "Tutor"),
-                    DropdownMenuEntry(value: "veterinário", label: "Veterinário")
+                    DropdownMenuEntry(
+                      value: "veterinário",
+                      label: "Veterinário",
+                    ),
                   ],
-                )
+                ),
               ],
             ),
             SizedBox(height: 16),
@@ -73,7 +99,7 @@ class LoginPage extends StatelessWidget {
                   "Email",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 TextField(
@@ -81,7 +107,7 @@ class LoginPage extends StatelessWidget {
                     border: OutlineInputBorder(),
                     hintText: 'Seu@email.com',
                   ),
-                )
+                ),
               ],
             ),
             SizedBox(height: 16),
@@ -92,33 +118,36 @@ class LoginPage extends StatelessWidget {
                   "Senha",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 TextField(
                   decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Insira sua senha'
+                    border: OutlineInputBorder(),
+                    hintText: 'Insira sua senha',
+                  ),
                 ),
-                )
               ],
             ),
             SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Esqueceu sua senha?", style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  "Esqueceu sua senha?",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 TextButton(
                   onPressed: () {},
                   style: TextButton.styleFrom(
-                    padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0)
+                    padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0),
                   ),
                   child: Text(
                     "Redefina a senha",
-                    style:TextStyle(fontWeight: FontWeight.bold)
-                  )
-                )
-              ]
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 34),
             SizedBox(
@@ -126,7 +155,7 @@ class LoginPage extends StatelessWidget {
               child: FilledButton(
                 style: FilledButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6)
+                    borderRadius: BorderRadius.circular(6),
                   ),
                 ),
                 onPressed: () {},
@@ -134,12 +163,9 @@ class LoginPage extends StatelessWidget {
                   padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
                   child: Text(
                     'Login',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold
-                    )
-                  )
-                )
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 4),
@@ -148,22 +174,20 @@ class LoginPage extends StatelessWidget {
               children: [
                 Text(
                   "Não tem conta?",
-                  style: TextStyle(fontWeight: FontWeight.bold)
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 TextButton(
                   onPressed: () {},
                   style: TextButton.styleFrom(
-                    padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0)
+                    padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0),
                   ),
                   child: Text(
                     "Cadastre-se",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold
-                    )
-                  )
-                )
-              ]
-            )
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
