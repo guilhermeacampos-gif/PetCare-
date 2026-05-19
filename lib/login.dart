@@ -55,11 +55,13 @@ class LoginPage extends StatelessWidget {
                     fontWeight: FontWeight.bold
                   ),
                 ),
-                TextField(
-                  decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Selecione uma opção...',
-                ),
+                DropdownMenu(
+                  hintText: "Selecione uma opção...",
+                  width: double.infinity,
+                  dropdownMenuEntries: [
+                    DropdownMenuEntry(value: "tutor", label: "Tutor"),
+                    DropdownMenuEntry(value: "veterinário", label: "Veterinário")
+                  ],
                 )
               ],
             ),
@@ -76,9 +78,9 @@ class LoginPage extends StatelessWidget {
                 ),
                 TextField(
                   decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Seu@email.com',
-                ),
+                    border: OutlineInputBorder(),
+                    hintText: 'Seu@email.com',
+                  ),
                 )
               ],
             ),
@@ -96,7 +98,7 @@ class LoginPage extends StatelessWidget {
                 TextField(
                   decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Insira sua senha'
+                  hintText: 'Insira sua senha'
                 ),
                 )
               ],
