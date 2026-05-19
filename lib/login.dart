@@ -29,13 +29,32 @@ class LoginPage extends StatelessWidget {
         child: Column (
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Login", style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
+            Text(
+              "Login",
+              style: TextStyle(
+                fontSize: 36,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary
+              )
+            ),
             SizedBox(height: 4),
-            Text("Acesse sua conta com seu e-mail e senha"),
+            Text(
+              "Acesse sua conta com seu e-mail e senha",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary
+              )
+            ),
+            SizedBox(height: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Acesso"),
+                Text(
+                  "Acesso",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
                 TextField(
                   decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -44,11 +63,17 @@ class LoginPage extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Email"),
+                Text(
+                  "Email",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
                 TextField(
                   decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -57,11 +82,17 @@ class LoginPage extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Senha"),
+                Text(
+                  "Senha",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
                 TextField(
                   decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -70,7 +101,7 @@ class LoginPage extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -93,7 +124,16 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {},
-                child: Text('Login')
+                child: Padding(
+                  padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
+                    )
+                  )
+                )
               ),
             ),
             SizedBox(height: 4),
