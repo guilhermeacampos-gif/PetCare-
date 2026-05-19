@@ -11,14 +11,28 @@ class SplashScreen extends StatelessWidget {
       body: Center(
         child: Image.asset('images/logo.png', width: largura_tela * 0.8),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Historicopet()),
-          );
-        },
-        child: Icon(Icons.arrow_forward),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Historicopet()),
+              );
+            },
+            child: Icon(Icons.pets),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
+            },
+            child: Icon(Icons.login),
+          ),
+        ],
       ),
     );
   }

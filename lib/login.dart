@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pet_care/alterarsenha.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -81,6 +82,19 @@ class LoginPage extends StatelessWidget {
                 DropdownMenu(
                   hintText: "Selecione uma opção...",
                   width: double.infinity,
+                  menuStyle: MenuStyle(
+                    padding: WidgetStateProperty.all(
+                      EdgeInsets.symmetric(horizontal: 24),
+                    ),
+                  ),
+                  trailingIcon: Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  selectedTrailingIcon: Icon(
+                    Icons.keyboard_arrow_up,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   dropdownMenuEntries: [
                     DropdownMenuEntry(value: "tutor", label: "Tutor"),
                     DropdownMenuEntry(
@@ -138,7 +152,12 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AlterarSenha()),
+                    );
+                  },
                   style: TextButton.styleFrom(
                     padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0),
                   ),
@@ -177,7 +196,12 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
+                  },
                   style: TextButton.styleFrom(
                     padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0),
                   ),
