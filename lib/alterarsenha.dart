@@ -68,6 +68,25 @@ class AlterarSenha extends StatelessWidget {
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
             SizedBox(height: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Email",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Seu@email.com',
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -91,7 +110,7 @@ class AlterarSenha extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Lemrbrou da senha?",
+                  "Lembrou da senha?",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 TextButton(
