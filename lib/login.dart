@@ -12,7 +12,7 @@ class LoginPage extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('images/logo.png', height: 30, fit: BoxFit.contain),
+            Image.asset('images/logo.png', height: 50, fit: BoxFit.contain),
             SizedBox(width: 10),
             Text(
               'PETCARE+',
@@ -110,12 +110,16 @@ class LoginPage extends StatelessWidget {
                 Text("Esqueceu sua senha?", style: TextStyle(fontWeight: FontWeight.bold)),
                 TextButton(
                   onPressed: () {},
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0)
+                  ),
                   child: Text(
                     "Redefina a senha",
                     style:TextStyle(fontWeight: FontWeight.bold)
                   )
                 )
-              ]),
+              ]
+            ),
             SizedBox(height: 34),
             SizedBox(
               width: double.infinity,
@@ -142,8 +146,22 @@ class LoginPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Não tem conta?", style: TextStyle(fontWeight: FontWeight.bold)),
-                TextButton(onPressed: () {}, child: Text("Cadastre-se", style: TextStyle(fontWeight: FontWeight.bold)))
+                Text(
+                  "Não tem conta?",
+                  style: TextStyle(fontWeight: FontWeight.bold)
+                ),
+                TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0)
+                  ),
+                  child: Text(
+                    "Cadastre-se",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold
+                    )
+                  )
+                )
               ]
             )
           ],
