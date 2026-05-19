@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'historicopet.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class SplashScreen extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => LoginPage()),
+            MaterialPageRoute(builder: (context) => Historicopet()),
           );
         },
         child: Icon(Icons.arrow_forward),
