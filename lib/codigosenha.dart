@@ -7,52 +7,48 @@ class AlterarSenha extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).colorScheme.primary,
         centerTitle: true,
         toolbarHeight: 96,
-        leading: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsetsGeometry.fromLTRB(8, 0, 0, 0),
-              child: IconButton(
-                icon: Icon(Icons.arrow_back),
-                color: Theme.of(context).colorScheme.secondary,
-                onPressed: () => Navigator.of(context).pop(),
-              )
-            )
-          ],
-        ),
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(
-              'images/logo.png',
-              height: 50,
-              fit: BoxFit.contain,
+            Expanded(child: SizedBox.shrink()),
+            Expanded(
+              flex: 2,
+              child: Row(
+                children: [
+                  Image.asset(
+                    'images/logo.png',
+                    height: 50,
+                    fit: BoxFit.contain,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    'PETCARE+',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(width: 10),
-            Text(
-              'PETCARE+',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-                fontWeight: FontWeight.bold,
+            Expanded(
+              child: SizedBox(
+                height: 50,
+                child: SvgPicture.asset(
+                  "images/emergency-white.svg",
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.secondary,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
             ),
           ],
         ),
-        actions: [
-          SizedBox(
-            height: 50,
-            child: SvgPicture.asset(
-              "images/emergency-white.svg",
-              colorFilter: ColorFilter.mode(
-                Theme.of(context).colorScheme.secondary,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-        ],
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),
