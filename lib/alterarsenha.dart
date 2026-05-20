@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pet_care/codigosenha.dart';
 import 'package:pet_care/login.dart';
 
 class AlterarSenha extends StatelessWidget {
@@ -111,7 +112,12 @@ class AlterarSenha extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CodigoSenha()),
+                    );
+                  },
                 child: Padding(
                   padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
                   child: Text(
@@ -130,12 +136,7 @@ class AlterarSenha extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 TextButton(
-                  onPressed: () {
-                    Navigator.pop(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  },
+                  onPressed: () => Navigator.of(context).pop(),
                   style: TextButton.styleFrom(
                     padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0),
                   ),
