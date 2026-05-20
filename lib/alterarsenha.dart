@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pet_care/login.dart';
 
 class AlterarSenha extends StatelessWidget {
   @override
@@ -65,7 +66,18 @@ class AlterarSenha extends StatelessWidget {
             SizedBox(height: 4),
             Text(
               "Vamos lhe ajudar a alterar sua senha",
-              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w500
+              ),
+            ),
+            SizedBox(height: 56),
+            Text(
+              "Insira o e-mail associado à sua conta.\nSe o e-mail corresponder com um cadastrado em nosso sistema, enviaremos um código para que possa fazer a alteração de senha.",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w500
+              ),
             ),
             SizedBox(height: 16),
             Column(
@@ -86,7 +98,7 @@ class AlterarSenha extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 172),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -114,7 +126,12 @@ class AlterarSenha extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
+                  },
                   style: TextButton.styleFrom(
                     padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0),
                   ),

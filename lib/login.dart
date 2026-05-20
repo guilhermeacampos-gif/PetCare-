@@ -66,7 +66,10 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 4),
             Text(
               "Acesse sua conta com seu e-mail e senha",
-              style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w500
+              ),
             ),
             SizedBox(height: 16),
             Column(
