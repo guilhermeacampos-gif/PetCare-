@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pet_care/login/codigosenha.dart';
-import 'package:pet_care/login/login.dart';
 
 class AlterarSenha extends StatelessWidget {
   @override
@@ -20,18 +19,14 @@ class AlterarSenha extends StatelessWidget {
                 icon: Icon(Icons.arrow_back),
                 color: Theme.of(context).colorScheme.secondary,
                 onPressed: () => Navigator.of(context).pop(),
-              )
-            )
+              ),
+            ),
           ],
         ),
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(
-              'images/logo.png',
-              height: 50,
-              fit: BoxFit.contain,
-            ),
+            Image.asset('images/logo.png', height: 50, fit: BoxFit.contain),
             SizedBox(width: 10),
             Text(
               'PETCARE+',
@@ -73,7 +68,7 @@ class AlterarSenha extends StatelessWidget {
               "Vamos lhe ajudar a alterar sua senha",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.w500
+                fontWeight: FontWeight.w500,
               ),
             ),
             SizedBox(height: 56),
@@ -81,7 +76,7 @@ class AlterarSenha extends StatelessWidget {
               "Insira o e-mail associado à sua conta.\nSe o e-mail corresponder com um cadastrado em nosso sistema, enviaremos um código para que possa fazer a alteração de senha.",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.w500
+                fontWeight: FontWeight.w500,
               ),
             ),
             SizedBox(height: 16),
