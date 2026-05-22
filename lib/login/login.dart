@@ -39,7 +39,7 @@ class LoginPage extends StatelessWidget {
               child: SizedBox(
                 height: 50,
                 child: SvgPicture.asset(
-                  "images/emergency-white.svg",
+                  "images/icones/emergency-white.svg",
                   colorFilter: ColorFilter.mode(
                     Theme.of(context).colorScheme.secondary,
                     BlendMode.srcIn,

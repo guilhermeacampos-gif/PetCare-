@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/login/login.dart';
 import 'historicopet.dart';
+import 'meuscuidados.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -14,6 +15,15 @@ class SplashScreen extends StatelessWidget {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MeusCuidados()),
+              );
+            },
+            child: Icon(Icons.alarm),
+          ),
           FloatingActionButton(
             onPressed: () {
               Navigator.push(
