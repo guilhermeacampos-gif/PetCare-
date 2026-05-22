@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pet_care/alterarsenha.dart';
+import 'package:pet_care/login/alterarsenha.dart';
 
 class LoginPage extends StatelessWidget {
   @override

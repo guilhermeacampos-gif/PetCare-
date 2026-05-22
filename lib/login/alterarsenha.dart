@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pet_care/codigosenha.dart';
-import 'package:pet_care/login.dart';
+import 'package:pet_care/login/codigosenha.dart';
+import 'package:pet_care/login/login.dart';
 
 class AlterarSenha extends StatelessWidget {
   @override
