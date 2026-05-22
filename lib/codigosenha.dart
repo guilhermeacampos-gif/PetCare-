@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pet_care/login.dart';
+import 'package:pet_care/redefinirsenha.dart';
 
 class CodigoSenha extends StatelessWidget {
   @override
@@ -220,7 +221,12 @@ class CodigoSenha extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RedefinirSenha()),
+                  );
+                },
                 child: Padding(
                   padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
                   child: Text(

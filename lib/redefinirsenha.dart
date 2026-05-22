@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pet_care/codigosenha.dart';
 import 'package:pet_care/login.dart';
 
-class AlterarSenha extends StatelessWidget {
+class RedefinirSenha extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +77,7 @@ class AlterarSenha extends StatelessWidget {
             ),
             SizedBox(height: 56),
             Text(
-              "Insira o e-mail associado à sua conta.\nSe o e-mail corresponder com um cadastrado em nosso sistema, enviaremos um código para que possa fazer a alteração de senha.",
+              "Código confirmado!\nDefina a nova senha da conta e, em seguida, digite a nova senha mais vez para confirmá-la.",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w500
@@ -89,21 +88,44 @@ class AlterarSenha extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Email",
+                  "Senha",
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(height: 4),
                 TextField(
+                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Seu@email.com',
+                    hintText: 'Inisra sua senha',
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 172),
+            SizedBox(height: 24),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Confirmar senha",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 4),
+                TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Confirme sua senha',
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 164),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -115,7 +137,7 @@ class AlterarSenha extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CodigoSenha()),
+                    MaterialPageRoute(builder: (context) => LoginPage()),
                   );
                 },
                 child: Padding(
@@ -126,26 +148,6 @@ class AlterarSenha extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Lembrou da senha?",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0),
-                  ),
-                  child: Text(
-                    "Faça o login",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
             ),
           ],
         ),

@@ -82,6 +82,7 @@ class LoginPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(height: 4),
                 DropdownMenu(
                   hintText: "Selecione uma opção...",
                   width: double.infinity,
@@ -119,6 +120,7 @@ class LoginPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(height: 4),
                 TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -138,7 +140,9 @@ class LoginPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(height: 4),
                 TextField(
+                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Insira sua senha',
@@ -146,7 +150,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -171,7 +175,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 34),
+            SizedBox(height: 96),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
