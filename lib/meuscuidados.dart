@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pet_care/screens/agenda_screen.dart';
+import 'package:pet_care/screens/documentos_screen.dart';
 
 class MeusCuidados extends StatelessWidget {
   @override
@@ -84,7 +86,12 @@ class MeusCuidados extends StatelessWidget {
                     ],
                   ),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AgendaScreen()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                       shadowColor: Colors.black.withValues(alpha: 0.5),
@@ -130,7 +137,12 @@ class MeusCuidados extends StatelessWidget {
                     ],
                   ),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => DocumentosScreen()),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                       shadowColor: Colors.black.withValues(alpha: 0.5),
