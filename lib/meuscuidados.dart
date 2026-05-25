@@ -5,6 +5,7 @@ class MeusCuidados extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         centerTitle: true,
@@ -50,7 +51,7 @@ class MeusCuidados extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsetsGeometry.fromLTRB(24, 24, 24, 24),
+        padding: EdgeInsetsGeometry.fromLTRB(24, 36, 24, 60),
         child: Column(
           children: [
             Row(
@@ -65,53 +66,98 @@ class MeusCuidados extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 64),
+            Spacer(),
             Column(
               children: [
                 Container(
                   width: double.infinity,
+                  height: 240,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadiusGeometry.all(Radius.circular(16)),
-                    border: Border.all(color: Colors.black, width: 2),
-                  ),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.alarm,
-                        size: 64,
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
-                      Text(
-                        "Agenda Diária",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
+                    borderRadius: BorderRadiusGeometry.all(
+                      Radius.circular(16)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.5),
+                        blurRadius: 2,
                       ),
                     ],
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      shadowColor: Colors.black.withValues(alpha: 0.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.all(
+                          Radius.circular(16)
+                        )
+                      )
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.alarm,
+                          size: 64,
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                        Text(
+                          "Agenda Diária",
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(shadowColor: Colors.black),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.folder_open,
-                        size: 64,
-                        color: Theme.of(context).colorScheme.tertiary,
-                      ),
-                      Text(
-                        "Documentos",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
+                SizedBox(height: 32),
+                Container(
+                  width: double.infinity,
+                  height: 240,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadiusGeometry.all(
+                      Radius.circular(16)
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.5),
+                        blurRadius: 2,
                       ),
                     ],
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      shadowColor: Colors.black.withValues(alpha: 0.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadiusGeometry.all(
+                          Radius.circular(16)
+                        )
+                      )
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.folder_open,
+                          size: 64,
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                        Text(
+                          "Documentos",
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
