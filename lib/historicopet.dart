@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
 import 'abrirnovocuidado.dart';
+import 'exportarhistorico.dart';
 
 class Historicopet extends StatelessWidget {
   const Historicopet({super.key});
 
-  /*void _abrirNovoCuidado(BuildContext context) {
+  void _abrirNovoCuidado(BuildContext context) {
     showModalBottomSheet(
       context: context, 
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (_) => const NovoCuidado(),
     );
-  }*/
+  }
+
+  void _abrirExportarHistorico(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => const Exportarhistorico(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final altura = MediaQuery.of(context).size.height;
-
 
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +62,10 @@ class Historicopet extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Rex', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),),
-                      Icon(Icons.more_vert, color: Colors.grey,)
+                      GestureDetector(
+                        onTap: () => _abrirExportarHistorico(context),
+                        child: const Icon(Icons.more_vert, color: Colors.grey),
+                      ),
                     ],
                   ),
                 Text('Cachorro - Golden Retriever', style: TextStyle(fontSize: 14, color: Colors.black87),),
@@ -75,7 +87,7 @@ class Historicopet extends StatelessWidget {
                       Text('Histórico', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),),
                     ],
                   ),
-                  ElevatedButton(onPressed: () {},
+                  ElevatedButton(onPressed: () => _abrirNovoCuidado(context),
                     style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.primary,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),),
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),),
