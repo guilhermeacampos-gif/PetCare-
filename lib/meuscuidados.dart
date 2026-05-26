@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pet_care/screens/agenda_screen.dart';
+import 'package:pet_care/screens/calendario_screen.dart';
 import 'package:pet_care/screens/documentos_screen.dart';
 import 'package:pet_care/historicopet.dart';
 
@@ -207,7 +208,12 @@ class MeusCuidados extends StatelessWidget {
           if (value == 0) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const Historicopet()),
+              MaterialPageRoute(builder: (context) => Historicopet()),
+            );
+          } else if (value == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CalendarioScreen()),
             );
           }
         },

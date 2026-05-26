@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '/login/login.dart';
-import 'historicopet.dart';
 import 'meuscuidados.dart';
 
 class SplashScreen extends StatelessWidget {
