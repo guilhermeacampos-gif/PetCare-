@@ -14,41 +14,31 @@ class LoginPage extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(child: SizedBox.shrink()),
-            Expanded(
-              flex: 2,
-              child: Row(
-                children: [
-                  Image.asset(
-                    'images/logo.png',
-                    height: 50,
-                    fit: BoxFit.contain,
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    'PETCARE+',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: SizedBox(
-                height: 50,
-                child: SvgPicture.asset(
-                  "images/icones/emergency-white.svg",
-                  colorFilter: ColorFilter.mode(
-                    Theme.of(context).colorScheme.secondary,
-                    BlendMode.srcIn,
-                  ),
-                ),
+            Image.asset('images/logo.png', height: 50, fit: BoxFit.contain),
+            SizedBox(width: 10),
+            Text(
+              'PETCARE+',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
+              "images/icones/emergency-white.svg",
+              height: 40, 
+              colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.secondary,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+        ]
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),

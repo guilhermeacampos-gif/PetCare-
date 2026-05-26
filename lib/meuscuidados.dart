@@ -40,17 +40,19 @@ class MeusCuidados extends StatelessWidget {
           ],
         ),
         actions: [
-          SizedBox(
-            height: 50,
-            child: SvgPicture.asset(
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
               "images/icones/emergency-white.svg",
+              height: 40, 
               colorFilter: ColorFilter.mode(
                 Theme.of(context).colorScheme.secondary,
                 BlendMode.srcIn,
               ),
             ),
           ),
-        ],
+          const SizedBox(width: 12),
+        ]
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.fromLTRB(24, 24, 24, 48),

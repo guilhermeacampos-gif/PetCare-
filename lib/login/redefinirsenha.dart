@@ -19,18 +19,14 @@ class RedefinirSenha extends StatelessWidget {
                 icon: Icon(Icons.arrow_back),
                 color: Theme.of(context).colorScheme.secondary,
                 onPressed: () => Navigator.of(context).pop(),
-              )
-            )
+              ),
+            ),
           ],
         ),
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset(
-              'images/logo.png',
-              height: 50,
-              fit: BoxFit.contain,
-            ),
+            Image.asset('images/logo.png', height: 50, fit: BoxFit.contain),
             SizedBox(width: 10),
             Text(
               'PETCARE+',
@@ -42,17 +38,19 @@ class RedefinirSenha extends StatelessWidget {
           ],
         ),
         actions: [
-          SizedBox(
-            height: 50,
-            child: SvgPicture.asset(
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
               "images/icones/emergency-white.svg",
+              height: 40, 
               colorFilter: ColorFilter.mode(
                 Theme.of(context).colorScheme.secondary,
                 BlendMode.srcIn,
               ),
             ),
           ),
-        ],
+          const SizedBox(width: 12),
+        ]
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),
