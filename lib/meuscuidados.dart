@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pet_care/screens/agenda_screen.dart';
 import 'package:pet_care/screens/documentos_screen.dart';
+import 'package:pet_care/historicopet.dart';
 
 class MeusCuidados extends StatelessWidget {
   @override
@@ -44,7 +45,7 @@ class MeusCuidados extends StatelessWidget {
             onPressed: () {},
             icon: SvgPicture.asset(
               "images/icones/emergency-white.svg",
-              height: 40, 
+              height: 40,
               colorFilter: ColorFilter.mode(
                 Theme.of(context).colorScheme.secondary,
                 BlendMode.srcIn,
@@ -52,7 +53,7 @@ class MeusCuidados extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-        ]
+        ],
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.fromLTRB(24, 24, 24, 48),
@@ -72,7 +73,7 @@ class MeusCuidados extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(child:SizedBox.shrink()),
+            Expanded(child: SizedBox.shrink()),
             Expanded(
               flex: 6,
               child: Column(
@@ -82,7 +83,7 @@ class MeusCuidados extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadiusGeometry.all(
-                          Radius.circular(16)
+                          Radius.circular(16),
                         ),
                         boxShadow: [
                           BoxShadow(
@@ -95,17 +96,21 @@ class MeusCuidados extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => AgendaScreen()),
+                            MaterialPageRoute(
+                              builder: (context) => AgendaScreen(),
+                            ),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).colorScheme.secondary,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.secondary,
                           shadowColor: Colors.black.withValues(alpha: 0.5),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadiusGeometry.all(
-                              Radius.circular(16)
-                            )
-                          )
+                              Radius.circular(16),
+                            ),
+                          ),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -129,58 +134,64 @@ class MeusCuidados extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 32),
-                  Expanded(child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadiusGeometry.all(
-                        Radius.circular(16)
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.5),
-                          blurRadius: 2,
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadiusGeometry.all(
+                          Radius.circular(16),
                         ),
-                      ],
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => DocumentosScreen()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.secondary,
-                        shadowColor: Colors.black.withValues(alpha: 0.5),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusGeometry.all(
-                            Radius.circular(16)
-                          )
-                        )
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.folder_open,
-                            size: 64,
-                            color: Theme.of(context).colorScheme.tertiary,
-                          ),
-                          Text(
-                            "Documentos",
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.tertiary,
-                            ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.5),
+                            blurRadius: 2,
                           ),
                         ],
                       ),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DocumentosScreen(),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.secondary,
+                          shadowColor: Colors.black.withValues(alpha: 0.5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.all(
+                              Radius.circular(16),
+                            ),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.folder_open,
+                              size: 64,
+                              color: Theme.of(context).colorScheme.tertiary,
+                            ),
+                            Text(
+                              "Documentos",
+                              style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.tertiary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),)
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -192,6 +203,14 @@ class MeusCuidados extends StatelessWidget {
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         currentIndex: 2,
+        onTap: (value) {
+          if (value == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Historicopet()),
+            );
+          }
+        },
         items: [
           BottomNavigationBarItem(
             icon: SizedBox(
@@ -226,7 +245,7 @@ class MeusCuidados extends StatelessWidget {
               padding: EdgeInsetsGeometry.all(6),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.white
+                color: Colors.white,
               ),
               child: SizedBox(
                 child: SvgPicture.asset(

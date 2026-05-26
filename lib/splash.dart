@@ -28,15 +28,6 @@ class SplashScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Historicopet()),
-              );
-            },
-            child: Icon(Icons.pets),
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                context,
                 MaterialPageRoute(builder: (context) => LoginPage()),
               );
             },
