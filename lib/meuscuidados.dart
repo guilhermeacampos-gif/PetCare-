@@ -189,6 +189,7 @@ class MeusCuidados extends StatelessWidget {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
+        currentIndex: 2,
         items: [
           BottomNavigationBarItem(
             icon: SizedBox(
@@ -217,13 +218,21 @@ class MeusCuidados extends StatelessWidget {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: SizedBox(
-              height: 50,
-              child: SvgPicture.asset(
-                "images/icones/hand-holding-heart.svg",
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.secondary,
-                  BlendMode.srcIn,
+            icon: Container(
+              width: 70,
+              height: 70,
+              padding: EdgeInsetsGeometry.all(6),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white
+              ),
+              child: SizedBox(
+                child: SvgPicture.asset(
+                  "images/icones/hand-holding-heart.svg",
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.primary,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             ),
