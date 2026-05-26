@@ -1,0 +1,95 @@
+import 'package:flutter/material.dart';
+import 'selecionartipo.dart';
+
+
+class NovoCuidado extends StatelessWidget {
+  const NovoCuidado({super.key});
+
+
+  void _abrirSelecionarTipo(BuildContext context) {
+    showModalBottomSheet<String>(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (_) => const Selecionartipo(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color(0xFFEFEFEF),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 40, height: 4, margin: const EdgeInsets.only(bottom:16),
+              decoration: BoxDecoration(color: Colors.grey.shade300, borderRadius: BorderRadius.circular(2),),
+            ),
+            const Text('Novo Cuidado', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
+            const SizedBox(height: 20),
+            GestureDetector(
+              onTap: () => _abrirSelecionarTipo(context),
+              child: _buildCampo(
+                label: 'Tipo',
+                valor: 'Selecionar',
+                trailing: const Icon(Icons.keyboard_arrow_down, color: Colors.grey,),
+              ),
+            ),
+            const SizedBox(height: 10),
+            _buildCampo(label: 'Descrição', valor: 'Digite uma descrição...', trailing: const SizedBox.shrink(), valorCinza: true),
+            const SizedBox(height: 10),
+            _buildCampo(label: 'Data', valor: 'Selecione a data...', trailing: const Icon(Icons.calendar_today_outlined, size: 18, color: Colors.grey),),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                child: Text('Salvar',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontSize: 16, fontWeight: FontWeight.bold,
+                ),),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget _buildCampo({
+    required String label,
+    required String valor,
+    required Widget trailing,
+    bool valorCinza = false,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 90,
+            child: Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
+          ),
+          Expanded(
+            child: Text(valor, style: TextStyle(color: valorCinza ? Colors.grey : Colors.black87, fontSize: 13),),
+          ),
+          trailing,
+        ],
+      ),
+    );
+  }
+}

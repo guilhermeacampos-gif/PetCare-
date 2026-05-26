@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 class Selecionartipo extends StatelessWidget {
   const Selecionartipo({super.key});
 
-
   static const _tipos = ['Vacina', 'Exame', 'Medicamento', 'Consulta'];
-
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +23,6 @@ class Selecionartipo extends StatelessWidget {
             ),
             const Text('Selecionar Tipo', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
             const SizedBox(height: 16),
-
-
             ..._tipos.map((tipo) => Column(
               children: [
                 ListTile(
@@ -38,8 +34,6 @@ class Selecionartipo extends StatelessWidget {
               ],
             ),),
             const SizedBox(height: 16),
-
-
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
