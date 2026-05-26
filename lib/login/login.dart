@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pet_care/login/alterarsenha.dart';
+import 'package:pet_care/login/cadastro.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -14,38 +15,55 @@ class LoginPage extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('images/logo.png', height: 50, fit: BoxFit.contain),
-            SizedBox(width: 10),
-            Text(
-              'PETCARE+',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-                fontWeight: FontWeight.bold,
+            Expanded(child: SizedBox.shrink()),
+            Expanded(
+              flex: 2,
+              child: Row(
+                children: [
+                  Image.asset(
+                    'images/logo.png',
+                    height: 50,
+                    fit: BoxFit.contain,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    'PETCARE+',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/confirmEmergency');
+                },
+
+                child: SizedBox(
+                  height: 50,
+
+                  child: SvgPicture.asset(
+                    "images/icones/emergency-white.svg",
+
+                    colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.secondary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(
-              "images/icones/emergency-white.svg",
-              height: 40, 
-              colorFilter: ColorFilter.mode(
-                Theme.of(context).colorScheme.secondary,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
-        ]
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(flex: 6, child: SizedBox.shrink()),
             Text(
               "Login",
               style: TextStyle(
@@ -59,10 +77,10 @@ class LoginPage extends StatelessWidget {
               "Acesse sua conta com seu e-mail e senha",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.w500
+                fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 12),
+            SizedBox(height: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -100,7 +118,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            SizedBox(height: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -120,7 +138,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            SizedBox(height: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -141,7 +159,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 4),
+            SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -166,7 +184,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(flex: 6, child: SizedBox.shrink()),
+            SizedBox(height: 96),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -185,6 +203,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -196,7 +215,7 @@ class LoginPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      MaterialPageRoute(builder: (context) => CadastroPage()),
                     );
                   },
                   style: TextButton.styleFrom(
@@ -209,7 +228,6 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(flex: 6, child: SizedBox.shrink()),
           ],
         ),
       ),

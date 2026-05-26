@@ -38,26 +38,36 @@ class RedefinirSenha extends StatelessWidget {
           ],
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(
-              "images/icones/emergency-white.svg",
-              height: 40, 
-              colorFilter: ColorFilter.mode(
-                Theme.of(context).colorScheme.secondary,
-                BlendMode.srcIn,
+          Padding(
+            padding: EdgeInsets.only(right: 16),
+
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/confirmEmergency');
+              },
+
+              child: SizedBox(
+                height: 50,
+
+                child: SvgPicture.asset(
+                  "images/icones/emergency-white.svg",
+
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.secondary,
+
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
             ),
           ),
-          const SizedBox(width: 12),
-        ]
+        ],
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(flex: 4, child: SizedBox.shrink()),
             Text(
               "Alterar Senha",
               style: TextStyle(
@@ -71,15 +81,15 @@ class RedefinirSenha extends StatelessWidget {
               "Vamos lhe ajudar a alterar sua senha",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.w500
+                fontWeight: FontWeight.w500,
               ),
             ),
-            Expanded(flex: 2, child: SizedBox.shrink()),
+            SizedBox(height: 56),
             Text(
               "Código confirmado!\nDefina a nova senha da conta e, em seguida, digite a nova senha mais vez para confirmá-la.",
               style: TextStyle(
                 color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.w500
+                fontWeight: FontWeight.w500,
               ),
             ),
             SizedBox(height: 16),
@@ -124,7 +134,7 @@ class RedefinirSenha extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(flex: 8, child: SizedBox.shrink()),
+            SizedBox(height: 164),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -148,7 +158,6 @@ class RedefinirSenha extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(flex: 6, child: SizedBox.shrink()),
           ],
         ),
       ),

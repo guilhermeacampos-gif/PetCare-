@@ -65,7 +65,12 @@ class PetCareAppBar extends StatelessWidget implements PreferredSizeWidget {
         Padding(
           padding: EdgeInsets.only(right: 12),
           child: GestureDetector(
-            onTap: () {},
+          onTap: () {
+  Navigator.pushNamed(
+    context,
+    '/confirmEmergency',
+  );
+},
             child: Container(
               width: 36,
               height: 36,
