@@ -58,6 +58,7 @@ class CodigoSenha extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Expanded(flex: 4, child: SizedBox.shrink()),
             Text(
               "Alterar Senha",
               style: TextStyle(
@@ -66,7 +67,6 @@ class CodigoSenha extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
-            SizedBox(height: 4),
             Text(
               "Vamos lhe ajudar a alterar sua senha",
               style: TextStyle(
@@ -114,12 +114,16 @@ class CodigoSenha extends StatelessWidget {
                       child: TextField(
                         maxLength: 1,
                         textAlign: TextAlign.center,
+                        onChanged: (value) {
+                          FocusScope.of(context).nextFocus();
+                        },
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold
                         ),
                         decoration: InputDecoration(
                           isDense: true,
+                          contentPadding: EdgeInsetsGeometry.fromLTRB(0, 8, 0, 8),
                           border: OutlineInputBorder(),
                           counterText: ""
                         ),
@@ -130,12 +134,16 @@ class CodigoSenha extends StatelessWidget {
                       child: TextField(
                         maxLength: 1,
                         textAlign: TextAlign.center,
+                        onChanged: (value) {
+                          FocusScope.of(context).nextFocus();
+                        },
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold
                         ),
                         decoration: InputDecoration(
                           isDense: true,
+                          contentPadding: EdgeInsetsGeometry.fromLTRB(0, 8, 0, 8),
                           border: OutlineInputBorder(),
                           counterText: ""
                         ),
@@ -146,12 +154,16 @@ class CodigoSenha extends StatelessWidget {
                       child: TextField(
                         maxLength: 1,
                         textAlign: TextAlign.center,
+                        onChanged: (value) {
+                          FocusScope.of(context).nextFocus();
+                        },
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold
                         ),
                         decoration: InputDecoration(
                           isDense: true,
+                          contentPadding: EdgeInsetsGeometry.fromLTRB(0, 8, 0, 8),
                           border: OutlineInputBorder(),
                           counterText: ""
                         ),
@@ -162,12 +174,16 @@ class CodigoSenha extends StatelessWidget {
                       child: TextField(
                         maxLength: 1,
                         textAlign: TextAlign.center,
+                        onChanged: (value) {
+                          FocusScope.of(context).nextFocus();
+                        },
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold
                         ),
                         decoration: InputDecoration(
                           isDense: true,
+                          contentPadding: EdgeInsetsGeometry.fromLTRB(0, 8, 0, 8),
                           border: OutlineInputBorder(),
                           counterText: ""
                         ),
@@ -178,12 +194,16 @@ class CodigoSenha extends StatelessWidget {
                       child: TextField(
                         maxLength: 1,
                         textAlign: TextAlign.center,
+                        onChanged: (value) {
+                          FocusScope.of(context).nextFocus();
+                        },
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold
                         ),
                         decoration: InputDecoration(
                           isDense: true,
+                          contentPadding: EdgeInsetsGeometry.fromLTRB(0, 8, 0, 8),
                           border: OutlineInputBorder(),
                           counterText: ""
                         ),
@@ -194,23 +214,26 @@ class CodigoSenha extends StatelessWidget {
                       child: TextField(
                         maxLength: 1,
                         textAlign: TextAlign.center,
+                        onChanged: (value) {
+                          FocusScope.of(context).nextFocus();
+                        },
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold
                         ),
                         decoration: InputDecoration(
                           isDense: true,
+                          contentPadding: EdgeInsetsGeometry.fromLTRB(0, 8, 0, 8),
                           border: OutlineInputBorder(),
                           counterText: ""
                         ),
                       ),
                     ),
-                    SizedBox(width: 12),
                   ],
                 )
               ],
             ),
-            SizedBox(height: 172),
+            Expanded(flex: 8, child: SizedBox.shrink()),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -234,7 +257,6 @@ class CodigoSenha extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -259,6 +281,7 @@ class CodigoSenha extends StatelessWidget {
                 ),
               ],
             ),
+            Expanded(flex: 4, child: SizedBox.shrink()),
           ],
         ),
       ),
