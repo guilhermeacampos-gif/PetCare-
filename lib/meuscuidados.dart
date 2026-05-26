@@ -53,127 +53,132 @@ class MeusCuidados extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsetsGeometry.fromLTRB(24, 36, 24, 60),
+        padding: EdgeInsetsGeometry.fromLTRB(24, 24, 24, 48),
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  "Meus Cuidados",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.tertiary,
-                  ),
-                ),
-              ],
-            ),
-            Spacer(),
-            Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 240,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadiusGeometry.all(
-                      Radius.circular(16)
+            Expanded(
+              child: Row(
+                children: [
+                  Text(
+                    "Meus Cuidados",
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.5),
-                        blurRadius: 2,
-                      ),
-                    ],
                   ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AgendaScreen()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      shadowColor: Colors.black.withValues(alpha: 0.5),
-                      shape: RoundedRectangleBorder(
+                ],
+              ),
+            ),
+            Expanded(child:SizedBox.shrink()),
+            Expanded(
+              flex: 6,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadiusGeometry.all(
                           Radius.circular(16)
-                        )
-                      )
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.alarm,
-                          size: 64,
-                          color: Theme.of(context).colorScheme.tertiary,
                         ),
-                        Text(
-                          "Agenda Diária",
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.tertiary,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.5),
+                            blurRadius: 2,
                           ),
+                        ],
+                      ),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AgendaScreen()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(context).colorScheme.secondary,
+                          shadowColor: Colors.black.withValues(alpha: 0.5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.all(
+                              Radius.circular(16)
+                            )
+                          )
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.alarm,
+                              size: 64,
+                              color: Theme.of(context).colorScheme.tertiary,
+                            ),
+                            Text(
+                              "Agenda Diária",
+                              style: TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Theme.of(context).colorScheme.tertiary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 32),
+                  Expanded(child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadiusGeometry.all(
+                        Radius.circular(16)
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.5),
+                          blurRadius: 2,
                         ),
                       ],
                     ),
-                  ),
-                ),
-                SizedBox(height: 32),
-                Container(
-                  width: double.infinity,
-                  height: 240,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadiusGeometry.all(
-                      Radius.circular(16)
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.5),
-                        blurRadius: 2,
-                      ),
-                    ],
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => DocumentosScreen()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      shadowColor: Colors.black.withValues(alpha: 0.5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusGeometry.all(
-                          Radius.circular(16)
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => DocumentosScreen()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.secondary,
+                        shadowColor: Colors.black.withValues(alpha: 0.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.all(
+                            Radius.circular(16)
+                          )
                         )
-                      )
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.folder_open,
-                          size: 64,
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                        Text(
-                          "Documentos",
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.folder_open,
+                            size: 64,
                             color: Theme.of(context).colorScheme.tertiary,
                           ),
-                        ),
-                      ],
+                          Text(
+                            "Documentos",
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.tertiary,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            ),
+                  ),)
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -181,6 +186,8 @@ class MeusCuidados extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
         selectedItemColor: Theme.of(context).colorScheme.secondary,
         unselectedItemColor: Theme.of(context).colorScheme.secondary,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
