@@ -57,6 +57,7 @@ class AlterarSenha extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Expanded(flex: 4, child: SizedBox.shrink()),
             Text(
               "Alterar Senha",
               style: TextStyle(
@@ -73,7 +74,7 @@ class AlterarSenha extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 56),
+            Expanded(flex: 2, child: SizedBox.shrink()),
             Text(
               "Insira o e-mail associado à sua conta.\nSe o e-mail corresponder com um cadastrado em nosso sistema, enviaremos um código para que possa fazer a alteração de senha.",
               style: TextStyle(
@@ -100,7 +101,7 @@ class AlterarSenha extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 172),
+            Expanded(flex: 8, child: SizedBox.shrink()),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -124,7 +125,6 @@ class AlterarSenha extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -144,6 +144,7 @@ class AlterarSenha extends StatelessWidget {
                 ),
               ],
             ),
+            Expanded(flex: 4, child: SizedBox.shrink()),
           ],
         ),
       ),
