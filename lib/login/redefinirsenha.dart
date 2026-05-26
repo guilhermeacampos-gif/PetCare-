@@ -57,6 +57,7 @@ class RedefinirSenha extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Expanded(flex: 4, child: SizedBox.shrink()),
             Text(
               "Alterar Senha",
               style: TextStyle(
@@ -73,7 +74,7 @@ class RedefinirSenha extends StatelessWidget {
                 fontWeight: FontWeight.w500
               ),
             ),
-            SizedBox(height: 56),
+            Expanded(flex: 2, child: SizedBox.shrink()),
             Text(
               "Código confirmado!\nDefina a nova senha da conta e, em seguida, digite a nova senha mais vez para confirmá-la.",
               style: TextStyle(
@@ -123,7 +124,7 @@ class RedefinirSenha extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 164),
+            Expanded(flex: 8, child: SizedBox.shrink()),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -147,6 +148,7 @@ class RedefinirSenha extends StatelessWidget {
                 ),
               ),
             ),
+            Expanded(flex: 6, child: SizedBox.shrink()),
           ],
         ),
       ),

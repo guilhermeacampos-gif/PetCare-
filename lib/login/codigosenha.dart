@@ -281,7 +281,7 @@ class CodigoSenha extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(flex: 4, child: SizedBox.shrink()),
+            Expanded(flex: 6, child: SizedBox.shrink()),
           ],
         ),
       ),
