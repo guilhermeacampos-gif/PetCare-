@@ -1,38 +1,30 @@
 import 'package:flutter/material.dart';
 import '/login/login.dart';
-import 'meuscuidados.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    double largura_tela = MediaQuery.of(context).size.width;
+    double larguraTela = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
-        child: Image.asset('images/logo.png', width: largura_tela * 0.8),
-      ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MeusCuidados()),
-              );
-            },
-            child: Icon(Icons.alarm),
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
-            },
-            child: Icon(Icons.login),
-          ),
-        ],
+        child: Image.asset('images/logo.png', width: larguraTela * 0.8),
       ),
     );
   }
