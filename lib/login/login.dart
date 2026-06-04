@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pet_care/login/alterarsenha.dart';
 import 'package:pet_care/login/cadastro.dart';
+import 'package:pet_care/screens/calendario_screen.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPage();
+}
+
+class _LoginPage extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,7 +190,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 96),
+            Expanded(flex: 1, child: SizedBox.shrink()),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -193,7 +199,12 @@ class LoginPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CalendarioScreen()),
+                  );
+                },
                 child: Padding(
                   padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
                   child: Text(
