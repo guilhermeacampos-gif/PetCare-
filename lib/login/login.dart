@@ -16,6 +16,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fator = screenWidth / 375;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -34,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               'PETCARE+',
               style: TextStyle(
+                fontSize: 14 * fator,
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
               ),
@@ -69,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               "Login",
               style: TextStyle(
-                fontSize: 36,
+                fontSize: 32 * fator,
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.primary,
               ),
@@ -78,6 +82,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               "Acesse sua conta com seu e-mail e senha",
               style: TextStyle(
+                fontSize: 12 * fator,
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w500,
               ),
@@ -89,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   "Acesso",
                   style: TextStyle(
+                    fontSize: 12 * fator,
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
@@ -127,6 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   "Email",
                   style: TextStyle(
+                    fontSize: 12 * fator,
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
@@ -148,6 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   "Senha",
                   style: TextStyle(
+                    fontSize: 12 * fator,
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
@@ -169,7 +177,10 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Text(
                   "Esqueceu sua senha?",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 12 * fator,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
@@ -183,7 +194,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: Text(
                     "Redefina a senha",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 12 * fator,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -211,7 +225,10 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
                   child: Text(
                     'Login',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18 * fator,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -221,7 +238,10 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Text(
                   "Não tem conta?",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 12 * fator,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
@@ -235,7 +255,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: Text(
                     "Cadastre-se",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 12 * fator,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],

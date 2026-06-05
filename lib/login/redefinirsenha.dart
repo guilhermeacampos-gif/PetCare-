@@ -5,6 +5,9 @@ import 'package:pet_care/login/login.dart';
 class RedefinirSenha extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fator = screenWidth / 375;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -26,11 +29,16 @@ class RedefinirSenha extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('assets/images/logo.png', height: 50, fit: BoxFit.contain),
+            Image.asset(
+              'assets/images/logo.png',
+              height: 50,
+              fit: BoxFit.contain,
+            ),
             SizedBox(width: 10),
             Text(
               'PETCARE+',
               style: TextStyle(
+                fontSize: 12 * fator,
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
               ),
@@ -57,11 +65,11 @@ class RedefinirSenha extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(flex: 4, child: SizedBox.shrink()),
+            Expanded(flex: 6, child: SizedBox.shrink()),
             Text(
               "Alterar Senha",
               style: TextStyle(
-                fontSize: 36,
+                fontSize: 30 * fator,
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.primary,
               ),
@@ -70,6 +78,7 @@ class RedefinirSenha extends StatelessWidget {
             Text(
               "Vamos lhe ajudar a alterar sua senha",
               style: TextStyle(
+                fontSize: 12 * fator,
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w500,
               ),
@@ -78,17 +87,19 @@ class RedefinirSenha extends StatelessWidget {
             Text(
               "Código confirmado!\nDefina a nova senha da conta e, em seguida, digite a nova senha mais vez para confirmá-la.",
               style: TextStyle(
+                fontSize: 12 * fator,
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 16),
+            Expanded(flex: 2, child: SizedBox.shrink()),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Senha",
                   style: TextStyle(
+                    fontSize: 12 * fator,
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
@@ -103,13 +114,14 @@ class RedefinirSenha extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 24),
+            Expanded(flex: 1, child: SizedBox.shrink()),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Confirmar senha",
                   style: TextStyle(
+                    fontSize: 12 * fator,
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
@@ -143,7 +155,10 @@ class RedefinirSenha extends StatelessWidget {
                   padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
                   child: Text(
                     'Enviar',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18 * fator,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),

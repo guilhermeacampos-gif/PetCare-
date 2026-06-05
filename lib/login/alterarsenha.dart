@@ -5,6 +5,9 @@ import 'package:pet_care/login/codigosenha.dart';
 class AlterarSenha extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fator = screenWidth / 375;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -26,11 +29,16 @@ class AlterarSenha extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('assets/images/logo.png', height: 50, fit: BoxFit.contain),
+            Image.asset(
+              'assets/images/logo.png',
+              height: 50,
+              fit: BoxFit.contain,
+            ),
             SizedBox(width: 10),
             Text(
               'PETCARE+',
               style: TextStyle(
+                fontSize: 12 * fator,
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
               ),
@@ -68,10 +76,11 @@ class AlterarSenha extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Expanded(flex: 6, child: SizedBox.shrink()),
             Text(
               "Alterar Senha",
               style: TextStyle(
-                fontSize: 36,
+                fontSize: 30 * fator,
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.primary,
               ),
@@ -80,25 +89,28 @@ class AlterarSenha extends StatelessWidget {
             Text(
               "Vamos lhe ajudar a alterar sua senha",
               style: TextStyle(
+                fontSize: 12 * fator,
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 56),
+            Expanded(flex: 4, child: SizedBox.shrink()),
             Text(
               "Insira o e-mail associado à sua conta.\nSe o e-mail corresponder com um cadastrado em nosso sistema, enviaremos um código para que possa fazer a alteração de senha.",
               style: TextStyle(
+                fontSize: 12 * fator,
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 16),
+            Expanded(flex: 2, child: SizedBox.shrink()),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Email",
                   style: TextStyle(
+                    fontSize: 12 * fator,
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
@@ -111,7 +123,7 @@ class AlterarSenha extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 172),
+            Expanded(flex: 6, child: SizedBox.shrink()),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -130,7 +142,10 @@ class AlterarSenha extends StatelessWidget {
                   padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
                   child: Text(
                     'Enviar',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18 * fator,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -141,7 +156,10 @@ class AlterarSenha extends StatelessWidget {
               children: [
                 Text(
                   "Lembrou da senha?",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 12 * fator,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
@@ -150,11 +168,15 @@ class AlterarSenha extends StatelessWidget {
                   ),
                   child: Text(
                     "Faça o login",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 12 * fator,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
             ),
+            Expanded(flex: 6, child: SizedBox.shrink()),
           ],
         ),
       ),

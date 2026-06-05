@@ -6,6 +6,9 @@ import 'package:pet_care/login/redefinirsenha.dart';
 class CodigoSenha extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fator = screenWidth / 375;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -27,11 +30,16 @@ class CodigoSenha extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('assets/images/logo.png', height: 50, fit: BoxFit.contain),
+            Image.asset(
+              'assets/images/logo.png',
+              height: 50,
+              fit: BoxFit.contain,
+            ),
             SizedBox(width: 10),
             Text(
               'PETCARE+',
               style: TextStyle(
+                fontSize: 12 * fator,
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
               ),
@@ -69,10 +77,11 @@ class CodigoSenha extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Expanded(flex: 6, child: SizedBox.shrink()),
             Text(
               "Alterar Senha",
               style: TextStyle(
-                fontSize: 36,
+                fontSize: 30 * fator,
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.primary,
               ),
@@ -81,11 +90,12 @@ class CodigoSenha extends StatelessWidget {
             Text(
               "Vamos lhe ajudar a alterar sua senha",
               style: TextStyle(
+                fontSize: 12 * fator,
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 24),
+            Expanded(flex: 4, child: SizedBox.shrink()),
             Container(
               height: 100,
               width: 100,
@@ -99,21 +109,23 @@ class CodigoSenha extends StatelessWidget {
                 size: 70,
               ),
             ),
-            SizedBox(height: 24),
+            Expanded(flex: 4, child: SizedBox.shrink()),
             Text(
               "Insira o código enviado para seu e-mail para prosseguir com a alteração.",
               style: TextStyle(
+                fontSize: 12 * fator,
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 16),
+            Expanded(flex: 2, child: SizedBox.shrink()),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "Código",
                   style: TextStyle(
+                    fontSize: 12 * fator,
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,
                   ),
@@ -126,7 +138,7 @@ class CodigoSenha extends StatelessWidget {
                         maxLength: 1,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 22 * fator,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
@@ -142,7 +154,7 @@ class CodigoSenha extends StatelessWidget {
                         maxLength: 1,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 22 * fator,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
@@ -158,7 +170,7 @@ class CodigoSenha extends StatelessWidget {
                         maxLength: 1,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 22 * fator,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
@@ -174,7 +186,7 @@ class CodigoSenha extends StatelessWidget {
                         maxLength: 1,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 22 * fator,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
@@ -190,7 +202,7 @@ class CodigoSenha extends StatelessWidget {
                         maxLength: 1,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 22 * fator,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
@@ -206,7 +218,7 @@ class CodigoSenha extends StatelessWidget {
                         maxLength: 1,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 22 * fator,
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
@@ -221,7 +233,7 @@ class CodigoSenha extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 172),
+            Expanded(flex: 6, child: SizedBox.shrink()),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -240,7 +252,10 @@ class CodigoSenha extends StatelessWidget {
                   padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
                   child: Text(
                     'Enviar',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18 * fator,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -251,7 +266,10 @@ class CodigoSenha extends StatelessWidget {
               children: [
                 Text(
                   "Lembrou da senha?",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 12 * fator,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
@@ -265,11 +283,15 @@ class CodigoSenha extends StatelessWidget {
                   ),
                   child: Text(
                     "Faça o login",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 12 * fator,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
             ),
+            Expanded(flex: 6, child: SizedBox.shrink()),
           ],
         ),
       ),
