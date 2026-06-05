@@ -26,7 +26,7 @@ class AlterarSenha extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('images/logo.png', height: 50, fit: BoxFit.contain),
+            Image.asset('assets/images/logo.png', height: 50, fit: BoxFit.contain),
             SizedBox(width: 10),
             Text(
               'PETCARE+',
@@ -50,7 +50,7 @@ class AlterarSenha extends StatelessWidget {
                 height: 50,
 
                 child: SvgPicture.asset(
-                  "images/icones/emergency-white.svg",
+                  "assets/images/icones/emergency-white.svg",
 
                   colorFilter: ColorFilter.mode(
                     Theme.of(context).colorScheme.secondary,

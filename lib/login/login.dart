@@ -1,15 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pet_care/login/alterarsenha.dart';
-import 'package:pet_care/login/cadastro.dart';
-import 'package:pet_care/screens/calendario_screen.dart';
+import 'package:pet_care/emergency/confirm_emergency.dart';
 
 class LoginPage extends StatefulWidget {
   @override
-  State<LoginPage> createState() => _LoginPage();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPage extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  String? selectedRole;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,55 +25,47 @@ class _LoginPage extends State<LoginPage> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Expanded(child: SizedBox.shrink()),
-            Expanded(
-              flex: 2,
-              child: Row(
-                children: [
-                  Image.asset(
-                    'images/logo.png',
-                    height: 50,
-                    fit: BoxFit.contain,
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    'PETCARE+',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+            Image.asset(
+              'assets/images/logo.png',
+              height: 50,
+              fit: BoxFit.contain,
             ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, '/confirmEmergency');
-                },
-
-                child: SizedBox(
-                  height: 50,
-
-                  child: SvgPicture.asset(
-                    "images/icones/emergency-white.svg",
-
-                    colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.secondary,
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                ),
+            SizedBox(width: 10),
+            Text(
+              'PETCARE+',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ConfirmEmergencyPage()),
+              );
+            },
+            icon: SvgPicture.asset(
+              "assets/images/icones/emergency-white.svg",
+              height: 40,
+              colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.secondary,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+        ],
       ),
       body: Padding(
         padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Expanded(flex: 6, child: SizedBox.shrink()),
             Text(
               "Login",
               style: TextStyle(
@@ -86,7 +82,7 @@ class _LoginPage extends State<LoginPage> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -124,7 +120,7 @@ class _LoginPage extends State<LoginPage> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -137,6 +133,7 @@ class _LoginPage extends State<LoginPage> {
                 ),
                 SizedBox(height: 4),
                 TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Seu@email.com',
@@ -144,7 +141,7 @@ class _LoginPage extends State<LoginPage> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -157,6 +154,7 @@ class _LoginPage extends State<LoginPage> {
                 ),
                 SizedBox(height: 4),
                 TextField(
+                  controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -165,7 +163,7 @@ class _LoginPage extends State<LoginPage> {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -190,7 +188,7 @@ class _LoginPage extends State<LoginPage> {
                 ),
               ],
             ),
-            Expanded(flex: 1, child: SizedBox.shrink()),
+            Expanded(flex: 6, child: SizedBox.shrink()),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -199,11 +197,15 @@ class _LoginPage extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(6),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CalendarioScreen()),
-                  );
+                onPressed: () async {
+                  try {
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      email: emailController.text.trim(),
+                      password: passwordController.text,
+                    );
+                  } catch (e) {
+                    print(e);
+                  }
                 },
                 child: Padding(
                   padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
@@ -214,7 +216,6 @@ class _LoginPage extends State<LoginPage> {
                 ),
               ),
             ),
-            SizedBox(height: 4),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -226,7 +227,7 @@ class _LoginPage extends State<LoginPage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CadastroPage()),
+                      MaterialPageRoute(builder: (context) => LoginPage()),
                     );
                   },
                   style: TextButton.styleFrom(
@@ -239,6 +240,7 @@ class _LoginPage extends State<LoginPage> {
                 ),
               ],
             ),
+            Expanded(flex: 6, child: SizedBox.shrink()),
           ],
         ),
       ),

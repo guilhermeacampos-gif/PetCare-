@@ -26,7 +26,7 @@ class RedefinirSenha extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('images/logo.png', height: 50, fit: BoxFit.contain),
+            Image.asset('assets/images/logo.png', height: 50, fit: BoxFit.contain),
             SizedBox(width: 10),
             Text(
               'PETCARE+',
@@ -38,29 +38,18 @@ class RedefinirSenha extends StatelessWidget {
           ],
         ),
         actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/confirmEmergency');
-              },
-
-              child: SizedBox(
-                height: 50,
-
-                child: SvgPicture.asset(
-                  "images/icones/emergency-white.svg",
-
-                  colorFilter: ColorFilter.mode(
-                    Theme.of(context).colorScheme.secondary,
-
-                    BlendMode.srcIn,
-                  ),
-                ),
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
+              "assets/images/icones/emergency-white.svg",
+              height: 40,
+              colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.secondary,
+                BlendMode.srcIn,
               ),
             ),
           ),
+          const SizedBox(width: 12),
         ],
       ),
       body: Padding(
@@ -68,6 +57,7 @@ class RedefinirSenha extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Expanded(flex: 4, child: SizedBox.shrink()),
             Text(
               "Alterar Senha",
               style: TextStyle(
@@ -84,7 +74,7 @@ class RedefinirSenha extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 56),
+            Expanded(flex: 2, child: SizedBox.shrink()),
             Text(
               "Código confirmado!\nDefina a nova senha da conta e, em seguida, digite a nova senha mais vez para confirmá-la.",
               style: TextStyle(
@@ -134,7 +124,7 @@ class RedefinirSenha extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 164),
+            Expanded(flex: 8, child: SizedBox.shrink()),
             SizedBox(
               width: double.infinity,
               child: FilledButton(
@@ -158,6 +148,7 @@ class RedefinirSenha extends StatelessWidget {
                 ),
               ),
             ),
+            Expanded(flex: 6, child: SizedBox.shrink()),
           ],
         ),
       ),

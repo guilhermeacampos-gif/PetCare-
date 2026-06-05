@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
-        child: Image.asset('images/logo.png', width: larguraTela * 0.8),
+        child: Image.asset('assets/images/logo.png', width: larguraTela * 0.8),
       ),
     );
   }
