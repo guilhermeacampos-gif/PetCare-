@@ -10,6 +10,7 @@ class CodigoSenha extends StatelessWidget {
     double fator = screenWidth / 375;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         centerTitle: true,

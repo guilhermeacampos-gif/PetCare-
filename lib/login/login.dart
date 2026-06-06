@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pet_care/login/alterarsenha.dart';
 import 'package:pet_care/emergency/confirm_emergency.dart';
+import 'package:pet_care/screens/calendario_screen.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -20,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
     double fator = screenWidth / 375;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -217,8 +219,35 @@ class _LoginPageState extends State<LoginPage> {
                       email: emailController.text.trim(),
                       password: passwordController.text,
                     );
-                  } catch (e) {
-                    print(e);
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Tem esse usuário no fire'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                      Future.delayed(Duration(seconds: 2), () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CalendarioScreen(),
+                          ),
+                        );
+                      });
+                    }
+                  } on FirebaseAuthException catch (e) {
+                    if (context.mounted) {
+                      String msg = e.toString();
+                      if (e.code == 'user-not-found') {
+                        msg = 'Usuário não encontrado';
+                      }
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(msg),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
                   }
                 },
                 child: Padding(
