@@ -5,13 +5,18 @@ import 'firebase_options.dart';
 import 'splash.dart';
 import 'emergency/confirm_emergency.dart';
 import 'screens/busca_pets_screen.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await GoogleSignIn.instance.initialize(
-    serverClientId: '1033030076476-a8q1ls9efhct8lbb9jp7stj6q8uvklil.apps.googleusercontent.com',
-  );
+
+  if (!kIsWeb) {
+    await GoogleSignIn.instance.initialize(
+      serverClientId:
+          '1033030076476-a8q1ls9efhct8lbb9jp7stj6q8uvklil.apps.googleusercontent.com',
+    );
+  }
   runApp(MeuApp());
 }
 
