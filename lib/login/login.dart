@@ -1,6 +1,7 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:google_sign_in/google_sign_in.dart";
 import "package:pet_care/login/alterarsenha.dart";
 import "package:pet_care/emergency/confirm_emergency.dart";
 import "package:pet_care/screens/calendario_screen.dart";
@@ -110,6 +111,16 @@ class _LoginPageState extends State<LoginPage> {
                           DropdownMenu(
                             hintText: "Selecione uma opção...",
                             width: double.infinity,
+                            inputDecorationTheme: const InputDecorationTheme(
+                              isDense: true,
+                              contentPadding: EdgeInsetsGeometry.fromLTRB(
+                                12,
+                                12,
+                                12,
+                                12,
+                              ),
+                              border: OutlineInputBorder(),
+                            ),
                             menuStyle: MenuStyle(
                               padding: WidgetStateProperty.all(
                                 EdgeInsets.symmetric(horizontal: 24),
@@ -149,6 +160,13 @@ class _LoginPageState extends State<LoginPage> {
                           TextField(
                             controller: emailController,
                             decoration: InputDecoration(
+                              isDense: true,
+                              contentPadding: EdgeInsetsGeometry.fromLTRB(
+                                12,
+                                12,
+                                12,
+                                12,
+                              ),
                               border: OutlineInputBorder(),
                               hintText: "Seu@email.com",
                             ),
@@ -172,6 +190,13 @@ class _LoginPageState extends State<LoginPage> {
                             controller: passwordController,
                             obscureText: true,
                             decoration: InputDecoration(
+                              isDense: true,
+                              contentPadding: EdgeInsetsGeometry.fromLTRB(
+                                12,
+                                12,
+                                12,
+                                12,
+                              ),
                               border: OutlineInputBorder(),
                               hintText: "Insira sua senha",
                             ),
@@ -269,10 +294,19 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 );
                               }
+                            } catch (e) {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Erro: $e"),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
                             }
                           },
                           child: Padding(
-                            padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
+                            padding: EdgeInsetsGeometry.fromLTRB(0, 12, 0, 12),
                             child: Text(
                               "Login",
                               style: TextStyle(
@@ -314,6 +348,84 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ],
+                      ),
+                      Expanded(flex: 1, child: SizedBox.shrink()),
+                      Text("Ou"),
+                      Expanded(flex: 1, child: SizedBox.shrink()),
+                      ElevatedButton.icon(
+                        onPressed: () async {
+                          try {
+                            GoogleSignInAccount? googleUser = await GoogleSignIn
+                                .instance
+                                .authenticate();
+
+                            GoogleSignInAuthentication googleAuth =
+                                googleUser.authentication;
+                            OAuthCredential credential =
+                                GoogleAuthProvider.credential(
+                                  idToken: googleAuth.idToken,
+                                );
+
+                            await FirebaseAuth.instance.signInWithCredential(
+                              credential,
+                            );
+
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("Usuário conectado"),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                              Future.delayed(Duration(seconds: 2), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CalendarioScreen(),
+                                  ),
+                                );
+                              });
+                            }
+                          } on FirebaseAuthException catch (e) {
+                            if (context.mounted) {
+                              String msg;
+                              if (e.code ==
+                                  "account-exists-with-different-credential") {
+                                msg = "Conta já existe com outra credencial";
+                              } else if (e.code == "invalid-credential") {
+                                msg = "Credencial inválida";
+                              } else {
+                                msg = "Erro ao fazer login com Google";
+                              }
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("Erro: ${e.code} | $msg"),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
+                          } catch (e) {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("Erro: $e"),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        icon: SvgPicture.asset(
+                          "assets/images/icones/google.svg",
+                          height: 24,
+                        ),
+                        label: Text(
+                          "Login com Google",
+                          style: TextStyle(
+                            fontSize: 12 * fator,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                       Expanded(flex: 6, child: SizedBox.shrink()),
                     ],
