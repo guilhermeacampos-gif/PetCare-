@@ -1,10 +1,11 @@
+import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:google_sign_in/google_sign_in.dart";
 import "package:pet_care/login/alterarsenha.dart";
 import "package:pet_care/emergency/confirm_emergency.dart";
-import "package:pet_care/screens/calendario_screen.dart";
+import "package:pet_care/meuscuidados.dart";
 
 class LoginPage extends StatefulWidget {
   @override
@@ -108,7 +109,13 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           SizedBox(height: 4),
-                          DropdownMenu(
+                          DropdownMenu<String>(
+                            initialSelection: selectedRole,
+                            onSelected: (String? value) {
+                              setState(() {
+                                selectedRole = value;
+                              });
+                            },
                             hintText: "Selecione uma opção...",
                             width: double.infinity,
                             inputDecorationTheme: const InputDecorationTheme(
@@ -246,12 +253,33 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           onPressed: () async {
+                            if (selectedRole == null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    "Erro: Selecione um tipo de acesso",
+                                  ),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                              return;
+                            }
                             try {
-                              await FirebaseAuth.instance
+                              UserCredential userCredential = await FirebaseAuth
+                                  .instance
                                   .signInWithEmailAndPassword(
                                     email: emailController.text.trim(),
                                     password: passwordController.text,
                                   );
+
+                              await FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(userCredential.user!.uid)
+                                  .set({
+                                    'role': selectedRole,
+                                    'email': userCredential.user!.email,
+                                  }, SetOptions(merge: true));
+
                               if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -263,7 +291,7 @@ class _LoginPageState extends State<LoginPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => CalendarioScreen(),
+                                      builder: (context) => MeusCuidados(),
                                     ),
                                   );
                                 });
@@ -354,8 +382,19 @@ class _LoginPageState extends State<LoginPage> {
                       Expanded(flex: 1, child: SizedBox.shrink()),
                       ElevatedButton.icon(
                         onPressed: () async {
+                          if (selectedRole == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  "Erro: Selecione um tipo de acesso",
+                                ),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                            return;
+                          }
                           try {
-                            GoogleSignInAccount? googleUser = await GoogleSignIn
+                            GoogleSignInAccount googleUser = await GoogleSignIn
                                 .instance
                                 .authenticate();
 
@@ -366,9 +405,17 @@ class _LoginPageState extends State<LoginPage> {
                                   idToken: googleAuth.idToken,
                                 );
 
-                            await FirebaseAuth.instance.signInWithCredential(
-                              credential,
-                            );
+                            UserCredential userCredential = await FirebaseAuth
+                                .instance
+                                .signInWithCredential(credential);
+
+                            await FirebaseFirestore.instance
+                                .collection('users')
+                                .doc(userCredential.user!.uid)
+                                .set({
+                                  'role': selectedRole,
+                                  'email': userCredential.user!.email,
+                                }, SetOptions(merge: true));
 
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -381,7 +428,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => CalendarioScreen(),
+                                    builder: (context) => MeusCuidados(),
                                   ),
                                 );
                               });
