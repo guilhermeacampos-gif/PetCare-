@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'abrirnovocuidado.dart';
 import 'exportarhistorico.dart';
 
-class Historicopet extends StatelessWidget {
+class Historicopet extends StatefulWidget {
   const Historicopet({super.key});
+
+  @override
+  State<Historicopet> createState() => _HistoricopetState();
+}
+
+class _HistoricopetState extends State<Historicopet> {
+  final _petRef = FirebaseFirestore.instance.collection('pets').doc('PdozJ55wCj01rqbDDtGt');
 
   void _abrirNovoCuidado(BuildContext context) {
     showModalBottomSheet(
@@ -34,7 +42,7 @@ class Historicopet extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('images/logo.png', height: 30, fit: BoxFit.contain),
+            Image.asset('assets/images/logo.png', height: 30, fit: BoxFit.contain),
             SizedBox(width: 10),
             Text(
               'PET CARE+',
@@ -52,28 +60,44 @@ class Historicopet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: (altura * 0.28), width: double.infinity,
-            child: Image.asset('images/Golden.png', fit: BoxFit.cover, alignment: Alignment.center,),),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Image.asset('assets/images/Golden.png', fit: BoxFit.cover, alignment: Alignment.center,),),
+            StreamBuilder<DocumentSnapshot>(
+              stream: _petRef.snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Padding(padding: EdgeInsets.all(16), child: CircularProgressIndicator(),);
+                }
+                if (!snapshot.hasData || !snapshot.data!.exists) {
+                  return const Padding(padding: EdgeInsets.all(16), child: Text('Pet não encontrado'),);
+                }
+                final pet = snapshot.data!.data() as Map<String, dynamic>;
+                
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Rex', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),),
-                      GestureDetector(
-                        onTap: () => _abrirExportarHistorico(context),
-                        child: const Icon(Icons.more_vert, color: Colors.grey),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(pet['nome'] ?? '', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),),
+                          GestureDetector(
+                            onTap: () => _abrirExportarHistorico(context),
+                            child: const Icon(Icons.more_vert, color: Colors.grey),
+                          ),
+                        ],
                       ),
+                      Text('${pet['tipo']} - ${pet['raca']}', 
+                        style: const TextStyle(fontSize: 14, color: Colors.black87)),
+                      Text('${pet['idade']} - ${pet['peso']}',
+                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black87)),
                     ],
                   ),
-                Text('Cachorro - Golden Retriever', style: TextStyle(fontSize: 14, color: Colors.black87),),
-                Text('4 anos - 25 kg', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black87),),
-                ],
-              ),
+                );
+              },
             ),
-            Divider(thickness: 1, height: 1),
+
+            const Divider(thickness: 1, height: 1),
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -95,17 +119,36 @@ class Historicopet extends StatelessWidget {
                 ],
               ),
             ),
-            _buildHistoricoCard(
-              context,
-              titulo : 'Banho/Tosa',
-              descricao : 'Banho Completo',
-              data : '19/02/2024',
-            ),
-            _buildHistoricoCard(
-              context,
-              titulo : 'Vacinação',
-              descricao : 'Vacina Antirrábica e V10',
-              data : '14/01/2024',
+
+            StreamBuilder<QuerySnapshot>(
+              stream: _petRef.collection('historico')
+                .orderBy('data', descending: true)
+                .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return const Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text('Nenhum registro encontrado'),
+                  );
+                }
+
+                final docs = snapshot.data!.docs;
+
+                return Column(
+                  children: docs.map((doc) {
+                    final dados = doc.data() as Map<String, dynamic>;
+                    return _buildHistoricoCard(
+                      context,
+                      titulo: dados['tipo'] ?? '',
+                      descricao: dados['descricao'] ?? '',
+                      data: dados['data'] ?? '',
+                    );
+                  }).toList(),
+                ); 
+              },
             ),
           ],
         ),
