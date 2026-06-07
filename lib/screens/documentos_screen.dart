@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../theme/app_theme.dart';
 import '../widgets/petcare_appbar.dart';
 import '../widgets/bottom_nav.dart';
@@ -14,63 +16,159 @@ class DocumentosScreen extends StatefulWidget {
 }
 
 class _DocumentosScreenState extends State<DocumentosScreen> {
-  int indiceNavAtual = 3;
-
-  List<ItemDocumento> documentos = [
-    ItemDocumento(nome: 'Receita_antibiotico(1).pdf', data: '15/04/2026'),
-    ItemDocumento(nome: 'Receita_antibiotico.pdf', data: '12/04/2026'),
-    ItemDocumento(nome: 'Exame_sangue.jpg', data: '10/04/2026'),
-  ];
-
-  void aoTrocarNav(int index) {
-    if (index == indiceNavAtual) return;
-    if (index == 1) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => CalendarioScreen(tipoUsuario: widget.tipoUsuario)),
-      );
-    } else if (index == 2) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => AgendaScreen(tipoUsuario: widget.tipoUsuario)),
-      );
-    }
-    setState(() => indiceNavAtual = index);
-  }
+  int paginaAtual = 3;
 
   @override
   Widget build(BuildContext context) {
-    Color corPrimaria = Theme.of(context).colorScheme.primary;
-    double larguraTela = MediaQuery.of(context).size.width;
+    double largura_tela = MediaQuery.of(context).size.width;
+    String uid = FirebaseAuth.instance.currentUser?.uid ?? '';
+    String email = FirebaseAuth.instance.currentUser?.email ?? '';
 
     return Scaffold(
-      backgroundColor: AppColors.lightGrey,
+      backgroundColor: AppColors.fundoCinza,
       appBar: PetCareAppBar(showBack: true),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: larguraTela * 0.05),
+              padding: EdgeInsets.symmetric(horizontal: largura_tela * 0.05),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 28),
                   Text(
                     'Documentos',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700, color: corPrimaria),
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                   SizedBox(height: 4),
                   Text(
                     'Arquivos do pet',
-                    style: TextStyle(fontSize: 13, color: AppColors.darkGrey),
+                    style: TextStyle(
+                        fontSize: 13, color: AppColors.cinzaTexto),
                   ),
                   SizedBox(height: 20),
                   Expanded(
-                    child: ListView.separated(
-                      itemCount: documentos.length,
-                      separatorBuilder: (context, i) => SizedBox(height: 12),
-                      itemBuilder: (context, i) => CardDocumento(doc: documentos[i]),
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('usuarios')
+                          .doc(uid)
+                          .collection('documentos')
+                          .orderBy('timestamp', descending: true)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        if (!snapshot.hasData ||
+                            snapshot.data!.docs.isEmpty) {
+                          return Center(
+                            child: Text(
+                              'Nenhum documento',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: AppColors.cinzaTexto),
+                            ),
+                          );
+                        }
+                        return ListView.separated(
+                          itemCount: snapshot.data!.docs.length,
+                          separatorBuilder: (context, i) =>
+                              SizedBox(height: 12),
+                          itemBuilder: (context, i) {
+                            var doc = snapshot.data!.docs[i];
+                            var dados =
+                                doc.data() as Map<String, dynamic>;
+                            return GestureDetector(
+                              onLongPress: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(16)),
+                                    title: Text('Remover documento?'),
+                                    content: Text(
+                                        'Deseja remover "${dados['nome']}"?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: Text('Cancelar',
+                                            style: TextStyle(
+                                                color:
+                                                    AppColors.cinzaTexto)),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          FirebaseFirestore.instance
+                                              .collection('usuarios')
+                                              .doc(uid)
+                                              .collection('documentos')
+                                              .doc(doc.id)
+                                              .delete();
+                                        },
+                                        child: Text('Remover',
+                                            style: TextStyle(
+                                              color: AppColors.corConsulta,
+                                              fontWeight: FontWeight.w700,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsetsGeometry.fromLTRB(
+                                    16, 18, 16, 18),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.circular(14),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color:
+                                          Color.fromRGBO(0, 0, 0, 0.06),
+                                      blurRadius: 8,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      dados['nome'] ?? '',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    SizedBox(height: 6),
+                                    Text(
+                                      dados['data_upload'] ?? '',
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: AppColors.cinzaTexto),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -78,69 +176,65 @@ class _DocumentosScreenState extends State<DocumentosScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+            padding: EdgeInsetsGeometry.fromLTRB(16, 8, 16, 16),
             child: SizedBox(
               width: double.infinity,
               height: 52,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await FirebaseFirestore.instance
+                      .collection('usuarios')
+                      .doc(uid)
+                      .collection('documentos')
+                      .add({
+                    'nome':
+                        'Documento_${DateTime.now().millisecondsSinceEpoch}.pdf',
+                    'data_upload':
+                        '${DateTime.now().day.toString().padLeft(2, '0')}/${DateTime.now().month.toString().padLeft(2, '0')}/${DateTime.now().year}',
+                    'criado_por': email,
+                    'timestamp': FieldValue.serverTimestamp(),
+                  });
+                },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: corPrimaria,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   foregroundColor: Colors.white,
                   elevation: 0,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12)),
                 ),
                 child: Text(
                   '+ Upload',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white),
                 ),
               ),
             ),
           ),
         ],
       ),
-      bottomNavigationBar: PetCareBottomNav(currentIndex: indiceNavAtual, onTap: aoTrocarNav),
-    );
-  }
-}
-
-class ItemDocumento {
-  final String nome;
-  final String data;
-  ItemDocumento({required this.nome, required this.data});
-}
-
-class CardDocumento extends StatelessWidget {
-  final ItemDocumento doc;
-  CardDocumento({required this.doc});
-
-  @override
-  Widget build(BuildContext context) {
-    Color corPrimaria = Theme.of(context).colorScheme.primary;
-
-    return Container(
-      padding: EdgeInsets.fromLTRB(16, 18, 16, 18),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        boxShadow: [
-          BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.06), blurRadius: 8, offset: Offset(0, 2)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            doc.nome,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: corPrimaria),
-            overflow: TextOverflow.ellipsis,
-          ),
-          SizedBox(height: 6),
-          Text(
-            doc.data,
-            style: TextStyle(fontSize: 13, color: AppColors.darkGrey),
-          ),
-        ],
+      bottomNavigationBar: PetCareBottomNav(
+        currentIndex: paginaAtual,
+        onTap: (index) {
+          if (index == paginaAtual) return;
+          if (index == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      CalendarioScreen(tipoUsuario: widget.tipoUsuario)),
+            );
+          } else if (index == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      AgendaScreen(tipoUsuario: widget.tipoUsuario)),
+            );
+          }
+          setState(() => paginaAtual = index);
+        },
       ),
     );
   }
