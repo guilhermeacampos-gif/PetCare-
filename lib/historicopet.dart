@@ -142,7 +142,7 @@ class _HistoricopetState extends State<Historicopet> {
                     final dados = doc.data() as Map<String, dynamic>;
                     return _buildHistoricoCard(
                       context,
-                      titulo: dados['tipo'] ?? '',
+                      titulo: dados['titulo'] ?? '',
                       descricao: dados['descricao'] ?? '',
                       data: dados['data'] ?? '',
                     );
