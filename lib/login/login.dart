@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pet_care/login/alterarsenha.dart';
-import 'package:pet_care/emergency/confirm_emergency.dart';
-import 'package:pet_care/screens/calendario_screen.dart';
+import "package:firebase_auth/firebase_auth.dart";
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:pet_care/login/alterarsenha.dart";
+import "package:pet_care/emergency/confirm_emergency.dart";
+import "package:pet_care/screens/calendario_screen.dart";
 
 class LoginPage extends StatefulWidget {
   @override
@@ -30,13 +30,13 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
-              'assets/images/logo.png',
+              "assets/images/logo.png",
               height: 50,
               fit: BoxFit.contain,
             ),
             SizedBox(width: 10),
             Text(
-              'PETCARE+',
+              "PETCARE+",
               style: TextStyle(
                 fontSize: 14 * fator,
                 color: Theme.of(context).colorScheme.secondary,
@@ -69,240 +69,256 @@ class _LoginPageState extends State<LoginPage> {
         builder: (context, constraints) {
           return SingleChildScrollView(
             child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: constraints.maxHeight,
-              ),
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: IntrinsicHeight(
                 child: Padding(
                   padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(flex: 6, child: SizedBox.shrink()),
-            Text(
-              "Login",
-              style: TextStyle(
-                fontSize: 32 * fator,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-            SizedBox(height: 4),
-            Text(
-              "Acesse sua conta com seu e-mail e senha",
-              style: TextStyle(
-                fontSize: 12 * fator,
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            SizedBox(height: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Acesso",
-                  style: TextStyle(
-                    fontSize: 12 * fator,
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 4),
-                DropdownMenu(
-                  hintText: "Selecione uma opção...",
-                  width: double.infinity,
-                  menuStyle: MenuStyle(
-                    padding: WidgetStateProperty.all(
-                      EdgeInsets.symmetric(horizontal: 24),
-                    ),
-                  ),
-                  trailingIcon: Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  selectedTrailingIcon: Icon(
-                    Icons.keyboard_arrow_up,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  dropdownMenuEntries: [
-                    DropdownMenuEntry(value: "tutor", label: "Tutor"),
-                    DropdownMenuEntry(
-                      value: "veterinário",
-                      label: "Veterinário",
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Email",
-                  style: TextStyle(
-                    fontSize: 12 * fator,
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 4),
-                TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Seu@email.com',
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Senha",
-                  style: TextStyle(
-                    fontSize: 12 * fator,
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 4),
-                TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Insira sua senha',
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 4),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Esqueceu sua senha?",
-                  style: TextStyle(
-                    fontSize: 12 * fator,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AlterarSenha()),
-                    );
-                  },
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0),
-                  ),
-                  child: Text(
-                    "Redefina a senha",
-                    style: TextStyle(
-                      fontSize: 12 * fator,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Expanded(flex: 6, child: SizedBox.shrink()),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton(
-                style: FilledButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                ),
-                onPressed: () async {
-                  try {
-                    await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: emailController.text.trim(),
-                      password: passwordController.text,
-                    );
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Tem esse usuário no fire'),
-                          backgroundColor: Colors.green,
+                    children: [
+                      Expanded(flex: 6, child: SizedBox.shrink()),
+                      Text(
+                        "Login",
+                        style: TextStyle(
+                          fontSize: 32 * fator,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
-                      );
-                      Future.delayed(Duration(seconds: 2), () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CalendarioScreen(),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        "Acesse sua conta com seu e-mail e senha",
+                        style: TextStyle(
+                          fontSize: 12 * fator,
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Acesso",
+                            style: TextStyle(
+                              fontSize: 12 * fator,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        );
-                      });
-                    }
-                  } on FirebaseAuthException catch (e) {
-                    if (context.mounted) {
-                      String msg = e.toString();
-                      if (e.code == 'user-not-found') {
-                        msg = 'Usuário não encontrado';
-                      }
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(msg),
-                          backgroundColor: Colors.red,
+                          SizedBox(height: 4),
+                          DropdownMenu(
+                            hintText: "Selecione uma opção...",
+                            width: double.infinity,
+                            menuStyle: MenuStyle(
+                              padding: WidgetStateProperty.all(
+                                EdgeInsets.symmetric(horizontal: 24),
+                              ),
+                            ),
+                            trailingIcon: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            selectedTrailingIcon: Icon(
+                              Icons.keyboard_arrow_up,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            dropdownMenuEntries: [
+                              DropdownMenuEntry(value: "tutor", label: "Tutor"),
+                              DropdownMenuEntry(
+                                value: "veterinário",
+                                label: "Veterinário",
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Email",
+                            style: TextStyle(
+                              fontSize: 12 * fator,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          TextField(
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "Seu@email.com",
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Senha",
+                            style: TextStyle(
+                              fontSize: 12 * fator,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          TextField(
+                            controller: passwordController,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "Insira sua senha",
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 4),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Esqueceu sua senha?",
+                            style: TextStyle(
+                              fontSize: 12 * fator,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AlterarSenha(),
+                                ),
+                              );
+                            },
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0),
+                            ),
+                            child: Text(
+                              "Redefina a senha",
+                              style: TextStyle(
+                                fontSize: 12 * fator,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(flex: 6, child: SizedBox.shrink()),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FilledButton(
+                          style: FilledButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                          ),
+                          onPressed: () async {
+                            try {
+                              await FirebaseAuth.instance
+                                  .signInWithEmailAndPassword(
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text,
+                                  );
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Usuário conectado"),
+                                    backgroundColor: Colors.green,
+                                  ),
+                                );
+                                Future.delayed(Duration(seconds: 2), () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CalendarioScreen(),
+                                    ),
+                                  );
+                                });
+                              }
+                            } on FirebaseAuthException catch (e) {
+                              if (context.mounted) {
+                                String msg;
+                                if (e.code == "user-not-found") {
+                                  msg = "Usuário não encontrado";
+                                } else if (e.code == "wrong-password") {
+                                  msg = "Senha incorreta";
+                                } else if (e.code == "invalid-email") {
+                                  msg = "E-mail inválido";
+                                } else if (e.code == "too-many-requests") {
+                                  msg =
+                                      "Muitas tentativas. Tente novamente mais tarde";
+                                } else if (e.code == "invalid-credential") {
+                                  msg = "E-mail ou senha incorretos";
+                                } else if (e.code == "channel-error") {
+                                  msg = "Erro de conexão com a internet";
+                                } else {
+                                  msg = "Erro ao fazer login";
+                                }
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Erro: ${e.code} | $msg"),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                          child: Padding(
+                            padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                fontSize: 18 * fator,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ),
-                      );
-                    }
-                  }
-                },
-                child: Padding(
-                  padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
-                  child: Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 18 * fator,
-                      fontWeight: FontWeight.bold,
-                    ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Não tem conta?",
+                            style: TextStyle(
+                              fontSize: 12 * fator,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginPage(),
+                                ),
+                              );
+                            },
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0),
+                            ),
+                            child: Text(
+                              "Cadastre-se",
+                              style: TextStyle(
+                                fontSize: 12 * fator,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Expanded(flex: 6, child: SizedBox.shrink()),
+                    ],
                   ),
                 ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Não tem conta?",
-                  style: TextStyle(
-                    fontSize: 12 * fator,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  },
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsetsGeometry.fromLTRB(4, 0, 0, 0),
-                  ),
-                  child: Text(
-                    "Cadastre-se",
-                    style: TextStyle(
-                      fontSize: 12 * fator,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Expanded(flex: 6, child: SizedBox.shrink()),
-          ],
-        ),
-      ),
               ),
             ),
           );
