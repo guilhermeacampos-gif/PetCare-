@@ -8,6 +8,9 @@ import 'package:pet_care/historicopet.dart';
 class MeusCuidados extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fator = screenWidth / 375;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
@@ -30,7 +33,11 @@ class MeusCuidados extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('images/logo.png', height: 50, fit: BoxFit.contain),
+            Image.asset(
+              'assets/images/logo.png',
+              height: 50,
+              fit: BoxFit.contain,
+            ),
             SizedBox(width: 10),
             Text(
               'PETCARE+',
@@ -45,7 +52,7 @@ class MeusCuidados extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: SvgPicture.asset(
-              "images/icones/emergency-white.svg",
+              "assets/images/icones/emergency-white.svg",
               height: 40,
               colorFilter: ColorFilter.mode(
                 Theme.of(context).colorScheme.secondary,
@@ -66,7 +73,7 @@ class MeusCuidados extends StatelessWidget {
                   Text(
                     "Meus Cuidados",
                     style: TextStyle(
-                      fontSize: 36,
+                      fontSize: 32 * fator,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.tertiary,
                     ),
@@ -124,7 +131,7 @@ class MeusCuidados extends StatelessWidget {
                             Text(
                               "Agenda Diária",
                               style: TextStyle(
-                                fontSize: 28,
+                                fontSize: 26 * fator,
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).colorScheme.tertiary,
                               ),
@@ -180,7 +187,7 @@ class MeusCuidados extends StatelessWidget {
                             Text(
                               "Documentos",
                               style: TextStyle(
-                                fontSize: 28,
+                                fontSize: 26 * fator,
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).colorScheme.tertiary,
                               ),
@@ -222,7 +229,7 @@ class MeusCuidados extends StatelessWidget {
             icon: SizedBox(
               height: 50,
               child: SvgPicture.asset(
-                "images/icones/pet-paw.svg",
+                "assets/images/icones/pet-paw.svg",
                 colorFilter: ColorFilter.mode(
                   Theme.of(context).colorScheme.secondary,
                   BlendMode.srcIn,
@@ -235,7 +242,7 @@ class MeusCuidados extends StatelessWidget {
             icon: SizedBox(
               height: 50,
               child: SvgPicture.asset(
-                "images/icones/calendar.svg",
+                "assets/images/icones/calendar.svg",
                 colorFilter: ColorFilter.mode(
                   Theme.of(context).colorScheme.secondary,
                   BlendMode.srcIn,
@@ -255,7 +262,7 @@ class MeusCuidados extends StatelessWidget {
               ),
               child: SizedBox(
                 child: SvgPicture.asset(
-                  "images/icones/hand-holding-heart.svg",
+                  "assets/images/icones/hand-holding-heart.svg",
                   colorFilter: ColorFilter.mode(
                     Theme.of(context).colorScheme.primary,
                     BlendMode.srcIn,
@@ -269,7 +276,7 @@ class MeusCuidados extends StatelessWidget {
             icon: SizedBox(
               height: 50,
               child: SvgPicture.asset(
-                "images/icones/perfil.svg",
+                "assets/images/icones/perfil.svg",
                 colorFilter: ColorFilter.mode(
                   Theme.of(context).colorScheme.secondary,
                   BlendMode.srcIn,
