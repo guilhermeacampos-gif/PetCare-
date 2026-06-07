@@ -21,7 +21,6 @@ class _LoginPageState extends State<LoginPage> {
     double fator = screenWidth / 375;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -66,10 +65,18 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(width: 12),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: constraints.maxHeight,
+              ),
+              child: IntrinsicHeight(
+                child: Padding(
+                  padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(flex: 6, child: SizedBox.shrink()),
             Text(
@@ -295,6 +302,11 @@ class _LoginPageState extends State<LoginPage> {
             Expanded(flex: 6, child: SizedBox.shrink()),
           ],
         ),
+      ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
