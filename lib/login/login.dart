@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pet_care/login/alterarsenha.dart';
 import 'package:pet_care/emergency/confirm_emergency.dart';
+import 'package:pet_care/screens/calendario_screen.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -64,10 +65,18 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(width: 12),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: constraints.maxHeight,
+              ),
+              child: IntrinsicHeight(
+                child: Padding(
+                  padding: EdgeInsetsGeometry.fromLTRB(24, 0, 24, 0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(flex: 6, child: SizedBox.shrink()),
             Text(
@@ -217,8 +226,35 @@ class _LoginPageState extends State<LoginPage> {
                       email: emailController.text.trim(),
                       password: passwordController.text,
                     );
-                  } catch (e) {
-                    print(e);
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Tem esse usuário no fire'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                      Future.delayed(Duration(seconds: 2), () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CalendarioScreen(),
+                          ),
+                        );
+                      });
+                    }
+                  } on FirebaseAuthException catch (e) {
+                    if (context.mounted) {
+                      String msg = e.toString();
+                      if (e.code == 'user-not-found') {
+                        msg = 'Usuário não encontrado';
+                      }
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(msg),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
                   }
                 },
                 child: Padding(
@@ -266,6 +302,11 @@ class _LoginPageState extends State<LoginPage> {
             Expanded(flex: 6, child: SizedBox.shrink()),
           ],
         ),
+      ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
