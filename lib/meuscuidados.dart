@@ -8,6 +8,9 @@ import 'package:pet_care/historicopet.dart';
 class MeusCuidados extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fator = screenWidth / 375;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
@@ -70,7 +73,7 @@ class MeusCuidados extends StatelessWidget {
                   Text(
                     "Meus Cuidados",
                     style: TextStyle(
-                      fontSize: 36,
+                      fontSize: 32 * fator,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.tertiary,
                     ),
@@ -128,7 +131,7 @@ class MeusCuidados extends StatelessWidget {
                             Text(
                               "Agenda Diária",
                               style: TextStyle(
-                                fontSize: 28,
+                                fontSize: 26 * fator,
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).colorScheme.tertiary,
                               ),
@@ -184,7 +187,7 @@ class MeusCuidados extends StatelessWidget {
                             Text(
                               "Documentos",
                               style: TextStyle(
-                                fontSize: 28,
+                                fontSize: 26 * fator,
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).colorScheme.tertiary,
                               ),
