@@ -8,62 +8,80 @@ class PetCareBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color corPrimaria = Theme.of(context).colorScheme.primary;
-
     return Container(
-      decoration: BoxDecoration(
-        color: corPrimaria,
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.2),
-            blurRadius: 10,
-            offset: Offset(0, -2),
-          ),
-        ],
-      ),
+      color: Theme.of(context).colorScheme.primary,
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ItemNav(icon: Icons.pets, isSelected: currentIndex == 0, onTap: () => onTap(0)),
-              ItemNav(icon: Icons.calendar_month, isSelected: currentIndex == 1, onTap: () => onTap(1)),
-              ItemNav(icon: Icons.volunteer_activism_outlined, isSelected: currentIndex == 2, onTap: () => onTap(2)),
-              ItemNav(icon: Icons.person_outline, isSelected: currentIndex == 3, onTap: () => onTap(3)),
+              GestureDetector(
+                onTap: () => onTap(0),
+                child: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: currentIndex == 0 ? Colors.white : Colors.transparent,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.pets,
+                      color: currentIndex == 0
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.white,
+                      size: 26),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => onTap(1),
+                child: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: currentIndex == 1 ? Colors.white : Colors.transparent,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.calendar_month,
+                      color: currentIndex == 1
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.white,
+                      size: 26),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => onTap(2),
+                child: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: currentIndex == 2 ? Colors.white : Colors.transparent,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.volunteer_activism_outlined,
+                      color: currentIndex == 2
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.white,
+                      size: 26),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => onTap(3),
+                child: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: currentIndex == 3 ? Colors.white : Colors.transparent,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.person_outline,
+                      color: currentIndex == 3
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.white,
+                      size: 26),
+                ),
+              ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class ItemNav extends StatelessWidget {
-  final IconData icon;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  ItemNav({required this.icon, required this.isSelected, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    Color corPrimaria = Theme.of(context).colorScheme.primary;
-
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          color: isSelected ? Colors.white : Colors.transparent,
-          shape: BoxShape.circle,
-        ),
-        child: Icon(
-          icon,
-          color: isSelected ? corPrimaria : Colors.white,
-          size: 26,
         ),
       ),
     );

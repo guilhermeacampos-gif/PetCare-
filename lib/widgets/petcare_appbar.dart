@@ -8,33 +8,21 @@ class PetCareAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color corPrimaria = Theme.of(context).colorScheme.primary;
-
     return AppBar(
-      backgroundColor: corPrimaria,
-      surfaceTintColor: Colors.transparent,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       elevation: 0,
-      scrolledUnderElevation: 0,
       automaticallyImplyLeading: false,
       leading: showBack
           ? IconButton(
               icon: Icon(Icons.arrow_back_ios, color: Colors.white, size: 20),
               onPressed: onBack ?? () => Navigator.of(context).pop(),
             )
-          : SizedBox(),
+          : null,
       centerTitle: true,
       title: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(255, 255, 255, 0.15),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(Icons.pets, color: Colors.white, size: 20),
-          ),
+          Image.asset('images/logo.png', height: 36, fit: BoxFit.contain),
           SizedBox(width: 8),
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -51,11 +39,7 @@ class PetCareAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               Text(
                 'PetCare+',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white70,
-                ),
+                style: TextStyle(fontSize: 10, color: Colors.white70),
               ),
             ],
           ),
@@ -63,14 +47,9 @@ class PetCareAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         Padding(
-          padding: EdgeInsets.only(right: 12),
+          padding: EdgeInsetsGeometry.fromLTRB(0, 0, 12, 0),
           child: GestureDetector(
-          onTap: () {
-  Navigator.pushNamed(
-    context,
-    '/confirmEmergency',
-  );
-},
+            onTap: () {},
             child: Container(
               width: 36,
               height: 36,
@@ -78,7 +57,8 @@ class PetCareAppBar extends StatelessWidget implements PreferredSizeWidget {
                 border: Border.all(color: Colors.white70, width: 1.5),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(Icons.notifications_active_outlined, color: Colors.white, size: 20),
+              child: Icon(Icons.notifications_outlined,
+                  color: Colors.white, size: 20),
             ),
           ),
         ),
