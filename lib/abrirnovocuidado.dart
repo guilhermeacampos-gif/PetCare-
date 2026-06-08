@@ -1,19 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'selecionartipo.dart';
 
 
-class NovoCuidado extends StatelessWidget {
+class NovoCuidado extends StatefulWidget {
   const NovoCuidado({super.key});
 
+  @override 
+  State<NovoCuidado> createState() => _NovoCuidadoState();
+}
 
-  void _abrirSelecionarTipo(BuildContext context) {
-    showModalBottomSheet<String>(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (_) => const Selecionartipo(),
-    );
-  }
+  class _NovoCuidadoState extends State<NovoCuidado> {
+    final _historicoRef = FirebaseFirestore.instance.collection('Pets').doc('69WrDHBDy4XNoLYIncac').collection('Histórico');
 
+    String? _tipoSelecionado;
+    String? _dataSelecionada;
+    bool _salvando = false;
+    final TextEditingController _descricaoController = TextEditingController();
+
+    @override
+    void dispose() {
+      _descricaoController.dispose();
+      super.dispose();
+    }
+
+    void _abrirSelecionarTipo() async {
+      final resultado = await showModalBottomSheet<String>(
+        context: context,
+        backgroundColor: Colors.transparent,
+        builder: (context) => const Selecionartipo(),
+      );
+      if (resultado != null) {
+        setState(() => _tipoSelecionado = resultado);
+      }
+    }
+
+    void _selecionarData() async {
+      final data = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2070),
+      );
+      if (data !=null) {
+        setState(() {
+          _dataSelecionada = '${data.day.toString().padLeft(2, '0')}/''${data.month.toString().padLeft(2, '0')}/''${data.year}';
+        });
+      }
+    }
+
+    void _salvar() async {
+      if (_tipoSelecionado == null) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Selecione um tipo de cuidado')));
+        return;
+      }
+      if (_dataSelecionada == null) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Selecione uma data')));
+        return;
+      }
+      setState(() => _salvando = true);
+
+      try {
+        await _historicoRef.add({
+          'titulo': _tipoSelecionado,
+          'descricao': _descricaoController.text.trim(),
+          'data': _dataSelecionada,
+          'criadoEm': FieldValue.serverTimestamp(),
+        });
+
+        if (mounted) Navigator.pop(context);
+      } catch (e) {
+        setState(() => _salvando = false);
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro ao salvar cuidado: $e')));
+        }
+      }
+    }
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,32 +96,72 @@ class NovoCuidado extends StatelessWidget {
             const Text('Novo Cuidado', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
             const SizedBox(height: 20),
             GestureDetector(
-              onTap: () => _abrirSelecionarTipo(context),
+              onTap: () => _abrirSelecionarTipo(),
               child: _buildCampo(
-                label: 'Tipo',
-                valor: 'Selecionar',
-                trailing: const Icon(Icons.keyboard_arrow_down, color: Colors.grey,),
+                label: 'Tipo de Cuidado',
+                valor: _tipoSelecionado ?? 'Selecione o tipo de cuidado',
+                trailing: const Icon(Icons.arrow_drop_down, size:18, color: Colors.grey)
               ),
             ),
             const SizedBox(height: 10),
-            _buildCampo(label: 'Descrição', valor: 'Digite uma descrição...', trailing: const SizedBox.shrink(), valorCinza: true),
+            
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 90,
+                    child: Text('Descrição', style: TextStyle(fontWeight: FontWeight.w500)),
+                  ),
+                  Expanded(
+                    child: TextField(
+                      controller: _descricaoController,
+                      decoration: const InputDecoration(
+                        hintText: 'Digite uma descrição ...',
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 13),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(height: 10),
-            _buildCampo(label: 'Data', valor: 'Selecione a data...', trailing: const Icon(Icons.calendar_today_outlined, size: 18, color: Colors.grey),),
+
+            GestureDetector(
+              onTap: () => _selecionarData(),
+              child: _buildCampo(
+                label: 'Data',
+                valor: _dataSelecionada ?? 'Selecione a data ...',
+                trailing: const Icon(Icons.calendar_today_outlined, size:18, color: Colors.grey),
+                valorCinza: _dataSelecionada == null,
+              ),
+            ),
             const SizedBox(height: 24),
+
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: _salvando ? null : _salvar,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
-                child: Text('Salvar',
+                child: _salvando 
+                  ? const SizedBox(
+                    height: 20, width: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                  : Text('Salvar',
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.secondary,
                     fontSize: 16, fontWeight: FontWeight.bold,
-                ),),
+                )),
               ),
             ),
           ],
