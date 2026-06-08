@@ -11,7 +11,7 @@ class Historicopet extends StatefulWidget {
 }
 
 class _HistoricopetState extends State<Historicopet> {
-  final _petRef = FirebaseFirestore.instance.collection('pets').doc('PdozJ55wCj01rqbDDtGt');
+  final _petRef = FirebaseFirestore.instance.collection('Pets').doc('69WrDHBDy4XNoLYIncac');
 
   void _abrirNovoCuidado(BuildContext context) {
     showModalBottomSheet(
@@ -121,7 +121,7 @@ class _HistoricopetState extends State<Historicopet> {
             ),
 
             StreamBuilder<QuerySnapshot>(
-              stream: _petRef.collection('historico')
+              stream: _petRef.collection('Histórico')
                 .orderBy('data', descending: true)
                 .snapshots(),
               builder: (context, snapshot) {
