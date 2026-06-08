@@ -43,7 +43,7 @@ class Selecionartipo extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12),),
                 ),
-                child: Text('Salvar', style: TextStyle(
+                child: Text('Cancelar', style: TextStyle(
                   color: Theme.of(context).colorScheme.secondary,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
