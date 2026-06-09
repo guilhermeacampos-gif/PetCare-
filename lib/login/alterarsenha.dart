@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pet_care/login/codigosenha.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class AlterarSenha extends StatelessWidget {
+class AlterarSenha extends StatefulWidget {
+  @override
+  _AlterarSenhaState createState() => _AlterarSenhaState();
+}
+
+class _AlterarSenhaState extends State<AlterarSenha> {
+  final TextEditingController emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -97,7 +104,7 @@ class AlterarSenha extends StatelessWidget {
             ),
             Expanded(flex: 4, child: SizedBox.shrink()),
             Text(
-              "Insira o e-mail associado à sua conta.\nSe o e-mail corresponder com um cadastrado em nosso sistema, enviaremos um código para que possa fazer a alteração de senha.",
+              "Insira o e-mail associado à sua conta.\nSe o e-mail corresponder com um cadastrado em nosso sistema, enviaremos um link para que possa fazer a alteração de senha.",
               style: TextStyle(
                 fontSize: 12 * fator,
                 color: Theme.of(context).colorScheme.primary,
@@ -117,6 +124,7 @@ class AlterarSenha extends StatelessWidget {
                   ),
                 ),
                 TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Seu@email.com',
@@ -133,11 +141,70 @@ class AlterarSenha extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CodigoSenha()),
-                  );
+                onPressed: () async {
+                  String email = emailController.text.trim();
+                  if (email.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Por favor, insira o seu e-mail')),
+                    );
+                    return;
+                  }
+                  if (!email.endsWith('@souunit.com.br')) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Erro: O e-mail não pertence a instituição',
+                        ),
+                        backgroundColor: Colors.red,
+                        duration: Duration(seconds: 5),
+                      ),
+                    );
+                    return;
+                  }
+                  try {
+                    await FirebaseAuth.instance.sendPasswordResetEmail(
+                      email: email,
+                    );
+                    if (mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Link de redefinição de senha enviado para o e-mail',
+                          ),
+                          backgroundColor: Colors.green,
+                          duration: Duration(seconds: 5),
+                        ),
+                      );
+                    }
+                  } on FirebaseAuthException catch (e) {
+                    String msg = '';
+                    if (e.code == 'user-not-found') {
+                      msg = 'Nenhum usuário encontrado para esse e-mail';
+                    } else if (e.code == 'invalid-email') {
+                      msg = 'O e-mail fornecido é inválido';
+                    } else {
+                      msg = 'Ocorreu um erro ao enviar o link';
+                    }
+                    if (mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(msg),
+                          backgroundColor: Colors.red,
+                          duration: Duration(seconds: 5),
+                        ),
+                      );
+                    }
+                  } catch (e) {
+                    if (mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Ocorreu um erro inesperado'),
+                          backgroundColor: Colors.red,
+                          duration: Duration(seconds: 5),
+                        ),
+                      );
+                    }
+                  }
                 },
                 child: Padding(
                   padding: EdgeInsetsGeometry.fromLTRB(0, 14, 0, 14),
