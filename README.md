@@ -2,7 +2,7 @@
 
 | Aluno | Atividade | Link do Vídeo |
 | ---   |  --- |  --- |
-| Pedro Lovatto Zambon | Tela de histórico do pet e telas de adicionar vacinas, exames, remédios e consultas
+| Pedro Lovatto Zambon | Tela de histórico do pet e telas de adicionar vacinas, exames, remédios e consultas | https://drive.google.com/drive/folders/1dqZSOK5y3uSdPmr5by8mQE1aEjsVPvOs?usp=sharing
 | Thiago Vinicius do Nascimento Marques | Cadastro Dropdown (selecionar entre Tutor e Veterinário), Cadastro como Tutor, Cadastro como Veterinário e Tela de Emergência
 | Guilherme Azevedo Campos |Tela de Calendário, Tela de Agenda, Tela de Documentos e atrelados | https://youtu.be/oIwzo8qiwMU
 | Anny Mariana Barreto |Listagem de pets (visão do veterinário), Listagem de pets (visão do tutor), Cadastro de pet, Tela de perfil
