@@ -2,6 +2,7 @@ import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:flutter/foundation.dart";
 import "package:google_sign_in/google_sign_in.dart";
 import "package:pet_care/login/alterarsenha.dart";
 import "package:pet_care/emergency/confirm_emergency.dart";
@@ -272,12 +273,30 @@ class _LoginPageState extends State<LoginPage> {
                                     password: passwordController.text,
                                   );
 
+                              final email = userCredential.user?.email;
+                              if (email == null ||
+                                  !email.endsWith('@souunit.com.br')) {
+                                await FirebaseAuth.instance.signOut();
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        "Erro: Email não pertence à instituição",
+                                      ),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                                return;
+                              }
+
                               await FirebaseFirestore.instance
-                                  .collection('users')
+                                  .collection('usuarios')
                                   .doc(userCredential.user!.uid)
                                   .set({
                                     'role': selectedRole,
                                     'email': userCredential.user!.email,
+                                    'criado_por': userCredential.user!.email,
                                   }, SetOptions(merge: true));
 
                               if (context.mounted) {
@@ -394,27 +413,54 @@ class _LoginPageState extends State<LoginPage> {
                             return;
                           }
                           try {
-                            GoogleSignInAccount googleUser = await GoogleSignIn
-                                .instance
-                                .authenticate();
+                            UserCredential userCredential;
+                            if (kIsWeb) {
+                              GoogleAuthProvider googleProvider =
+                                  GoogleAuthProvider();
+                              userCredential = await FirebaseAuth.instance
+                                  .signInWithPopup(googleProvider);
+                            } else {
+                              GoogleSignInAccount googleUser =
+                                  await GoogleSignIn.instance.authenticate();
 
-                            GoogleSignInAuthentication googleAuth =
-                                googleUser.authentication;
-                            OAuthCredential credential =
-                                GoogleAuthProvider.credential(
-                                  idToken: googleAuth.idToken,
+                              GoogleSignInAuthentication googleAuth =
+                                  googleUser.authentication;
+                              OAuthCredential credential =
+                                  GoogleAuthProvider.credential(
+                                    idToken: googleAuth.idToken,
+                                  );
+
+                              userCredential = await FirebaseAuth.instance
+                                  .signInWithCredential(credential);
+                            }
+
+                            final email = userCredential.user?.email;
+                            if (email == null ||
+                                !email.endsWith('@souunit.com.br')) {
+                              await FirebaseAuth.instance.signOut();
+                              if (!kIsWeb) {
+                                await GoogleSignIn.instance.signOut();
+                              }
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      "Erro: Email não pertence à instituição",
+                                    ),
+                                    backgroundColor: Colors.red,
+                                  ),
                                 );
-
-                            UserCredential userCredential = await FirebaseAuth
-                                .instance
-                                .signInWithCredential(credential);
+                              }
+                              return;
+                            }
 
                             await FirebaseFirestore.instance
-                                .collection('users')
+                                .collection('usuarios')
                                 .doc(userCredential.user!.uid)
                                 .set({
                                   'role': selectedRole,
                                   'email': userCredential.user!.email,
+                                  'criado_por': userCredential.user!.email,
                                 }, SetOptions(merge: true));
 
                             if (context.mounted) {
@@ -434,6 +480,7 @@ class _LoginPageState extends State<LoginPage> {
                               });
                             }
                           } on FirebaseAuthException catch (e) {
+                            print(e);
                             if (context.mounted) {
                               String msg;
                               if (e.code ==
@@ -452,6 +499,7 @@ class _LoginPageState extends State<LoginPage> {
                               );
                             }
                           } catch (e) {
+                            print(e);
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
