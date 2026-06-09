@@ -122,7 +122,7 @@ class _HistoricopetState extends State<Historicopet> {
 
             StreamBuilder<QuerySnapshot>(
               stream: _petRef.collection('Histórico')
-                .orderBy('data', descending: true)
+                .orderBy('dataTimestamp', descending: true)
                 .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {

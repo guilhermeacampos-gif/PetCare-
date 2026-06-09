@@ -59,6 +59,13 @@ class NovoCuidado extends StatefulWidget {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Selecione uma data')));
         return;
       }
+
+      final partes = _dataSelecionada!.split('/');
+      final dataTimestamp = Timestamp.fromDate(DateTime(
+        int.parse(partes[2]), 
+        int.parse(partes[1]), 
+        int.parse(partes[0]), 
+      ));
       setState(() => _salvando = true);
 
       try {
@@ -66,6 +73,7 @@ class NovoCuidado extends StatefulWidget {
           'titulo': _tipoSelecionado,
           'descricao': _descricaoController.text.trim(),
           'data': _dataSelecionada,
+          'dataTimestamp': dataTimestamp,
           'criado Em': FieldValue.serverTimestamp(),
           'criado Por': FirebaseAuth.instance.currentUser?.email,
         });
