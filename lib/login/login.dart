@@ -6,6 +6,7 @@ import "package:flutter/foundation.dart";
 import "package:google_sign_in/google_sign_in.dart";
 import "package:pet_care/login/alterarsenha.dart";
 import "package:pet_care/emergency/confirm_emergency.dart";
+import "package:pet_care/login/cadastro.dart";
 import "package:pet_care/meuscuidados.dart";
 
 class LoginPage extends StatefulWidget {
@@ -257,9 +258,7 @@ class _LoginPageState extends State<LoginPage> {
                             if (selectedRole == null) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(
-                                    "Erro: Selecione um tipo de acesso",
-                                  ),
+                                  content: Text("Selecione um tipo de acesso"),
                                   backgroundColor: Colors.red,
                                 ),
                               );
@@ -281,7 +280,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                        "Erro: Email não pertence à instituição",
+                                        "Email não pertence à instituição",
                                       ),
                                       backgroundColor: Colors.red,
                                     ),
@@ -336,7 +335,7 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text("Erro: ${e.code} | $msg"),
+                                    content: Text(msg),
                                     backgroundColor: Colors.red,
                                   ),
                                 );
@@ -345,7 +344,7 @@ class _LoginPageState extends State<LoginPage> {
                               if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text("Erro: $e"),
+                                    content: Text("$e"),
                                     backgroundColor: Colors.red,
                                   ),
                                 );
@@ -379,7 +378,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => LoginPage(),
+                                  builder: (context) => CadastroPage(),
                                 ),
                               );
                             },
@@ -404,9 +403,7 @@ class _LoginPageState extends State<LoginPage> {
                           if (selectedRole == null) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text(
-                                  "Erro: Selecione um tipo de acesso",
-                                ),
+                                content: Text("Selecione um tipo de acesso"),
                                 backgroundColor: Colors.red,
                               ),
                             );
@@ -445,7 +442,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      "Erro: Email não pertence à instituição",
+                                      "Email não pertence à instituição",
                                     ),
                                     backgroundColor: Colors.red,
                                   ),
@@ -493,7 +490,7 @@ class _LoginPageState extends State<LoginPage> {
                               }
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text("Erro: ${e.code} | $msg"),
+                                  content: Text(msg),
                                   backgroundColor: Colors.red,
                                 ),
                               );
@@ -503,7 +500,7 @@ class _LoginPageState extends State<LoginPage> {
                             if (context.mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text("Erro: $e"),
+                                  content: Text("$e"),
                                   backgroundColor: Colors.red,
                                 ),
                               );
