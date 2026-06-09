@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pet_care/emergency/confirm_emergency.dart';
 import 'package:pet_care/screens/agenda_screen.dart';
 import 'package:pet_care/screens/calendario_screen.dart';
 import 'package:pet_care/screens/documentos_screen.dart';
@@ -14,6 +15,7 @@ class MeusCuidados extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Theme.of(context).colorScheme.primary,
         centerTitle: true,
         toolbarHeight: 96,
@@ -34,14 +36,15 @@ class MeusCuidados extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
-              'assets/images/logo.png',
+              "assets/images/logo.png",
               height: 50,
               fit: BoxFit.contain,
             ),
             SizedBox(width: 10),
             Text(
-              'PETCARE+',
+              "PETCARE+",
               style: TextStyle(
+                fontSize: 14 * fator,
                 color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.bold,
               ),
@@ -50,7 +53,12 @@ class MeusCuidados extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ConfirmEmergencyPage()),
+              );
+            },
             icon: SvgPicture.asset(
               "assets/images/icones/emergency-white.svg",
               height: 40,
@@ -60,7 +68,7 @@ class MeusCuidados extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
         ],
       ),
       body: Padding(
